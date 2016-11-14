@@ -36,7 +36,6 @@ jobs:
       - IN: aws-creds
       - IN: test-infra-repo
       - IN: aws-infra-setup
-        switch: off
       - IN: build-ami
         switch: off
       - TASK:
@@ -54,6 +53,7 @@ jobs:
     steps:
       - IN: micro-api-img
       - IN: api-img-opts
+      - IN: test-infra-prov
 
 # TEST deployment for VISUALIZER
   - name: api-test
