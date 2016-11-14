@@ -63,8 +63,8 @@ jobs:
     on_failure:
       - script: /build/IN/prod-infra-repo/gitRepo/archiveState.sh
 
-########################## VISUALIZER PIPELINE JOBS #########################
-# manifest gen for VISUALIZER
+########################## API PIPELINE JOBS #########################
+# manifest gen for API
   - name: api-man
     type: manifest
     steps:
@@ -72,7 +72,7 @@ jobs:
       - IN: api-img-opts
       - IN: test-infra-prov
 
-# TEST deployment for VISUALIZER
+# TEST deployment for API
   - name: api-test
     type: deploy
     steps:
@@ -80,6 +80,15 @@ jobs:
       - IN: env-test-aws
       - TASK: managed
 
+# PROD deployment for API
+  - name: api-prod
+    type: deploy
+    steps:
+      - IN: sit
+      - IN: api-test
+        switch: off
+      - IN: env-prod-aws
+      - TASK: managed
 
 ######################## SIT JOBS #########################
   - name: sit
