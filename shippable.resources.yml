@@ -39,33 +39,33 @@ resources:
       sourceName: "avinci/demoSetupAWS"
       branch: master
 
-# REPO of AWS demo Infra
-  - name: test-infra-repo
-    type: gitRepo
-    integration: "avinci-gh"
-    pointer:
-      sourceName: "avinci/demoTestInfra"
-      branch: master
-
-# REPO of AWS demo Infra
-  - name: prod-infra-repo
-    type: gitRepo
-    integration: "avinci-gh"
-    pointer:
-      sourceName: "avinci/demoProdInfra"
-      branch: master
-
-########################## MICRO-API PIPELINE CODE #########################
-#
-## micro api Image
-#  - name: micro-api-img
-#    type: image
-#    integration: avinci-dh
+## REPO of AWS demo Infra
+#  - name: test-infra-repo
+#    type: gitRepo
+#    integration: "avinci-gh"
 #    pointer:
-#      sourceName: "avinci/micro-api"
-#    seed:
-#      versionName: "master.1"
+#      sourceName: "avinci/demoTestInfra"
+#      branch: master
 #
+## REPO of AWS demo Infra
+#  - name: prod-infra-repo
+#    type: gitRepo
+#    integration: "avinci-gh"
+#    pointer:
+#      sourceName: "avinci/demoProdInfra"
+#      branch: master
+#
+########################## MICRO-API PIPELINE CODE #########################
+
+# micro api Image
+  - name: micro-api-img
+    type: image
+    integration: avinci-dh
+    pointer:
+      sourceName: "avinci/micro-api"
+    seed:
+      versionName: "master.1"
+
 ## Docker Image Options for micro api
 #  - name: api-img-opts
 #    type: dockerOptions
