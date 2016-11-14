@@ -39,6 +39,8 @@ resources:
       sourceName: "avinci/demoTestInfra"
       branch: master
 
+########################## MICRO-API PIPELINE CODE #########################
+
 # micro api Image
   - name: micro-api-img
     type: image
@@ -48,53 +50,28 @@ resources:
     seed:
       versionName: "master.1"
 
-########################## VISUALIZER PIPELINE CODE #########################
 ## CREDS for DOCKER HUB
 #  - name: docker-creds
 #    type: integration
 #    integration: avinci-dh
 #
-## REPO of VISUALIZER
-#  - name: dv-repo
-#    type: gitRepo
-#    integration: "avinci-gh"
-#    pointer:
-#      sourceName: "avinci/dv"
-#      branch: master
-#
-## Docker Image for VISUALIZER
-#  - name: dv-img
-#    type: image
-#    integration: avinci-dh
-#    pointer:
-#      sourceName: "avinci/dv"
-#    seed:
-#      versionName: "master.7"
-#
-## Docker Image Options for VISUALIZER
-#  - name: dv-img-opts
-#    type: dockerOptions
-#    version:
-#      memory: 64
-#      cpuShares: 256
-#      portMappings:
-#        - 80:80
-#
-## env vars for VISUALIZER
-#  - name: dv-params
-#    type: params
-#    version:
-#      params:
-#        secure: Cjlw/VotAfTPrvRuw9wpDGuKG7Xa2d5YTUuzrRlKeg5/sJKxSJmPN9rkxUjKTeiT3XG7iii/N0QdqXpe9006OJSppIzWPvdUo5a2MLpdAqylp3pVRugX6Wp4EaYGnFHPtOiQkceDfsqX3oroYUKmM8QYqP/oRgUfPTfhULeB85QZGWrIKvXrDj2DP/H7Zc9p741R5RqmuHXNvc0xFIjEzK3v8xgMSBxfO1CSqtkTbUdsa43a04KGc0cDaW8Rha9GLidz/46IymrkT33cEh93YhLFZGO+SXsdm24aM89zBYVqYelC1FU3lwV40A4aYtWb4BGGuA9pntCx4aDqBKalQg== #MONGO_API_URL
-#
-## TEST AWS cluster
-#  - name: env-test-aws
-#    type: cluster
-#    integration: avi-ecs
-#    pointer:
-#      sourceName : "test-aws"
-#      region: "us-east-1"
 
+# Docker Image Options for micro api
+  - name: api-img-opts
+    type: dockerOptions
+    version:
+      memory: 64
+      cpuShares: 256
+      portMappings:
+        - 80:80
+
+# TEST AWS cluster
+  - name: env-test-aws
+    type: cluster
+    integration: avi-ecs
+    pointer:
+      sourceName : "test-aws"
+      region: "us-east-1"
 
 ########################### BOX PIPELINE CODE #########################
 ## REPO of BOX code
