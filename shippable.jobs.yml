@@ -86,6 +86,7 @@ jobs:
     type: runSh
     steps:
       - IN: sit-repo
+      - IN: api-test
       - IN: sit-params
       - TASK:
         - script: sudo apt-get install -y jq
