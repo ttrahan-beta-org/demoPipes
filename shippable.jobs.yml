@@ -81,22 +81,20 @@ jobs:
       - TASK: managed
 
 
-######################### BOX PIPELINE JOBS #########################
-## CI for BOX
-#  - name: box-ci
-#    type: runSh
-#    steps:
-#      - IN: box-repo
-#      - IN: docker-creds
-#      - TASK:
-#        - script: sudo apt-get install -y jq
-#        - script: ./IN/box-repo/gitRepo/build.sh
-#      - OUT: box-img
-#    on_success:
-#      - script: echo 'on success !!!!!'
-#    on_failure:
-#      - script: echo 'Failed job .... :('
-#
+######################## SIT JOBS #########################
+  - name: sit
+    type: runSh
+    steps:
+      - IN: sit-repo
+      - IN: sit-params
+      - TASK:
+        - script: sudo apt-get install -y jq
+        - script: IN/sit-repo/gitRepo/test.sh sit-params
+    on_success:
+      - script: touch /build/state/success.txt
+    on_failure:
+      - script: touch /build/state/failure.txt
+
 ## manifest gen for BOX
 #  - name: box-man
 #    type: manifest
@@ -112,18 +110,4 @@ jobs:
 #      - IN: box-t-params
 #      - IN: env-test-aws
 #
-#  - name: box-e2e-test
-#    type: runSh
-#    steps:
-#      - IN: box-repo
-#        switch: off
-#      - IN: box-test-aws
-#      - TASK:
-#        - script: sudo apt-get install -y jq
-#        - script: ./IN/box-repo/gitRepo/test.sh
-#        - script: touch /build/state/success.txt
-#    on_success:
-#      - script: echo 'on success !!!!!'
-#    on_failure:
-#      - script: echo 'Failed job .... :('
 

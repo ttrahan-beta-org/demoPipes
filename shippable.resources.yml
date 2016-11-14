@@ -66,12 +66,6 @@ resources:
     seed:
       versionName: "master.1"
 
-## CREDS for DOCKER HUB
-#  - name: docker-creds
-#    type: integration
-#    integration: avinci-dh
-#
-
 # Docker Image Options for micro api
   - name: api-img-opts
     type: dockerOptions
@@ -89,15 +83,23 @@ resources:
       sourceName : "test-aws"
       region: "us-east-1"
 
-########################### BOX PIPELINE CODE #########################
-## REPO of BOX code
-#  - name: box-repo
-#    type: gitRepo
-#    integration: "avinci-gh"
-#    pointer:
-#      sourceName: avinci/box
-#      branch: master
-#
+########################### API SIT Code #########################
+# REPO of SIT code
+  - name: sit-repo
+    type: gitRepo
+    integration: "avinci-gh"
+    pointer:
+      sourceName: avinci/demoSIT
+      branch: master
+
+# SIT env vars for BOX
+  - name: sit-params
+    type: params
+    version:
+      params:
+        API_URL: "54.145.1.103"
+        API_TOKEN: "NA"
+
 ## Docker Image for BOX
 #  - name: box-img
 #    type: image
