@@ -15,21 +15,21 @@ jobs:
       - script: cat /build/IN/bldami-repo/gitRepo/output.txt
 
 ########################## DEPLOY AWS INFRA #########################
-#  - name: test-infra-prov
-#    type: runSh
-#    steps:
-#      - IN: aws-pem
-#      - IN: aws-creds
-#      - IN: test-infra-repo
-#      - IN: build-ami
-#        switch: off
-#      - TASK:
-#        - script: sudo apt-get install -y jq
-#        - script: IN/test-infra-repo/gitRepo/build.sh
-#    on_success:
-#      - script: /build/IN/test-infra-repo/gitRepo/archiveState.sh
-#    on_failure:
-#      - script: /build/IN/test-infra-repo/gitRepo/archiveState.sh
+  - name: test-infra-prov
+    type: runSh
+    steps:
+      - IN: aws-pem
+      - IN: aws-creds
+      - IN: test-infra-repo
+      - IN: build-ami
+        switch: off
+      - TASK:
+        - script: sudo apt-get install -y jq
+        - script: IN/test-infra-repo/gitRepo/build.sh
+    on_success:
+      - script: /build/IN/test-infra-repo/gitRepo/archiveState.sh
+    on_failure:
+      - script: /build/IN/test-infra-repo/gitRepo/archiveState.sh
 
 ########################## VISUALIZER PIPELINE JOBS #########################
 ## CI for VISUALIZER
