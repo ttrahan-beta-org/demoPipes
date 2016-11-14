@@ -63,62 +63,45 @@ jobs:
     on_failure:
       - script: /build/IN/prod-infra-repo/gitRepo/archiveState.sh
 
-########################## API PIPELINE JOBS #########################
-# manifest gen for API
-  - name: api-man
-    type: manifest
-    steps:
-      - IN: micro-api-img
-      - IN: api-img-opts
-      - IN: test-infra-prov
-
-# TEST deployment for API
-  - name: api-test
-    type: deploy
-    steps:
-      - IN: api-man
-      - IN: env-test-aws
-      - TASK: managed
-
-# PROD deployment for API
-  - name: api-prod
-    type: deploy
-    steps:
-      - IN: sit
-      - IN: api-p-scaler
-      - IN: api-test
-        switch: off
-      - IN: env-prod-aws
-      - TASK: managed
-
-######################## SIT JOBS #########################
-  - name: sit
-    type: runSh
-    steps:
-      - IN: sit-repo
-      - IN: api-test
-      - IN: sit-params
-      - TASK:
-        - script: sudo apt-get install -y jq
-        - script: IN/sit-repo/gitRepo/test.sh sit-params
-    on_success:
-      - script: touch /build/state/success.txt
-    on_failure:
-      - script: touch /build/state/failure.txt
-
-## manifest gen for BOX
-#  - name: box-man
+########################### API PIPELINE JOBS #########################
+## manifest gen for API
+#  - name: api-man
 #    type: manifest
 #    steps:
-#      - IN: box-img
-#      - IN: box-img-opts
+#      - IN: micro-api-img
+#      - IN: api-img-opts
+#      - IN: test-infra-prov
 #
-## TEST deployment for BOX
-#  - name: box-test-aws
+## TEST deployment for API
+#  - name: api-test
 #    type: deploy
 #    steps:
-#      - IN: box-man
-#      - IN: box-t-params
+#      - IN: api-man
 #      - IN: env-test-aws
+#      - TASK: managed
 #
-
+## PROD deployment for API
+#  - name: api-prod
+#    type: deploy
+#    steps:
+#      - IN: sit
+#      - IN: api-p-scaler
+#      - IN: api-test
+#        switch: off
+#      - IN: env-prod-aws
+#      - TASK: managed
+#
+######################### SIT JOBS #########################
+#  - name: sit
+#    type: runSh
+#    steps:
+#      - IN: sit-repo
+#      - IN: api-test
+#      - IN: sit-params
+#      - TASK:
+#        - script: sudo apt-get install -y jq
+#        - script: IN/sit-repo/gitRepo/test.sh sit-params
+#    on_success:
+#      - script: touch /build/state/success.txt
+#    on_failure:
+#      - script: touch /build/state/failure.txt

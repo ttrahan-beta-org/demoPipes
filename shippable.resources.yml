@@ -56,90 +56,60 @@ resources:
       branch: master
 
 ########################## MICRO-API PIPELINE CODE #########################
-
-# micro api Image
-  - name: micro-api-img
-    type: image
-    integration: avinci-dh
-    pointer:
-      sourceName: "avinci/micro-api"
-    seed:
-      versionName: "master.1"
-
-# Docker Image Options for micro api
-  - name: api-img-opts
-    type: dockerOptions
-    version:
-      memory: 64
-      cpuShares: 256
-      portMappings:
-        - 80:80
-
-# TEST AWS cluster
-  - name: env-test-aws
-    type: cluster
-    integration: avi-ecs
-    pointer:
-      sourceName : "test-aws"
-      region: "us-east-1"
-
-# PROD AWS cluster
-  - name: env-prod-aws
-    type: cluster
-    integration: avi-ecs
-    pointer:
-      sourceName : "prod-aws"
-      region: "us-east-1"
-
-# PROD replica controller for API
-  - name: api-p-scaler
-    type: replicas
-    version:
-      count: 2
-
-
-########################### API SIT Code #########################
-# REPO of SIT code
-  - name: sit-repo
-    type: gitRepo
-    integration: "avinci-gh"
-    pointer:
-      sourceName: avinci/demoSIT
-      branch: master
-
-# SIT env vars for BOX
-  - name: sit-params
-    type: params
-    version:
-      params:
-        API_URL: "54.145.1.103"
-        API_TOKEN: "NA"
-
-## Docker Image for BOX
-#  - name: box-img
+#
+## micro api Image
+#  - name: micro-api-img
 #    type: image
 #    integration: avinci-dh
 #    pointer:
-#      sourceName: "avinci/box"
+#      sourceName: "avinci/micro-api"
 #    seed:
-#      versionName: "master.5"
+#      versionName: "master.1"
 #
-## TEST env vars for BOX
-#  - name: box-t-params
-#    type: params
-#    version:
-#      params:
-#        DB_HOST: "ds015700.mlab.com"
-#        DB_NAME: "ayeaye"
-#        DB_PORT: "15700"
-#        DB_USERNAME: "ayeaye"
-#        ENVIRONMENT: "test-aws"
-#        secure: aNq+L+5WjOBuFfDJpJuo9GKGFLo3e08Mgkz257iQXMTIBhomFTO939zCgRYn0LK7HJBjGt9L4XTSm9s9fvCp1L8TtpgqiZysV1f+xS3FnUChcaGENuS2DNEG6UB5fS2HFMtK4lS6Yqa1b8YflA6Pkt82/d2D7IIAzlH+g4OuCdOgDBtWauz7IVwinMqd4jCB5tscVY55CsNXp4ePbjrdgbkZzfTKiQfX7x7YqIOpvMO7jWsXxewHr1CqUPxBp3RvBeHtvdd3u8v3nWf7FwpJdk6tE3XWt1R5OQb1t83gCoVRonAB4z8OOGSJdJdpixQg5LKK+Oq7ua+TMbZGPdw6hQ== #DB_PASSWORD
-#
-## Docker Image Options for BOX
-#  - name: box-img-opts
+## Docker Image Options for micro api
+#  - name: api-img-opts
 #    type: dockerOptions
 #    version:
 #      memory: 64
-#      cpuShares: 512
-
+#      cpuShares: 256
+#      portMappings:
+#        - 80:80
+#
+## TEST AWS cluster
+#  - name: env-test-aws
+#    type: cluster
+#    integration: avi-ecs
+#    pointer:
+#      sourceName : "test-aws"
+#      region: "us-east-1"
+#
+## PROD AWS cluster
+#  - name: env-prod-aws
+#    type: cluster
+#    integration: avi-ecs
+#    pointer:
+#      sourceName : "prod-aws"
+#      region: "us-east-1"
+#
+## PROD replica controller for API
+#  - name: api-p-scaler
+#    type: replicas
+#    version:
+#      count: 2
+#
+############################ API SIT Code #########################
+## REPO of SIT code
+#  - name: sit-repo
+#    type: gitRepo
+#    integration: "avinci-gh"
+#    pointer:
+#      sourceName: avinci/demoSIT
+#      branch: master
+#
+## SIT env vars for BOX
+#  - name: sit-params
+#    type: params
+#    version:
+#      params:
+#        API_URL: "54.145.1.103"
+#        API_TOKEN: "NA"
