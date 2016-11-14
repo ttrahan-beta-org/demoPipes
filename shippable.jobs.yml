@@ -1,0 +1,115 @@
+jobs:
+########################## BUILD AMI #########################
+  - name: build-ami
+    type: runSh
+    steps:
+      - IN: aws-creds
+      - IN: bldami-repo
+      - IN: bldami-params
+      - TASK:
+        - script: sudo apt-get install -y jq
+        - script: IN/bldami-repo/gitRepo/basePack.sh bldami-params
+    on_success:
+      - script: echo "SUCCESS"
+    on_failure:
+      - script: cat ./IN/bldami-repo/gitRepo/output.txt
+
+########################## DEPLOY AWS INFRA #########################
+#  - name: infra-prov
+#    type: runSh
+#    steps:
+#      - IN: aws-demo-pem
+#      - IN: aws-demo-creds
+#      - IN: demo-infra-repo
+#      - IN: build-ami
+#        switch: off
+#      - IN: infra-params
+#      - TASK:
+#        - script: sudo apt-get install -y jq
+#        - script: IN/demo-infra-repo/gitRepo/build.sh
+#    on_success:
+#      - script: /build/IN/demo-infra-repo/gitRepo/archiveState.sh
+#    on_failure:
+#      - script: /build/IN/demo-infra-repo/gitRepo/archiveState.sh
+
+########################## VISUALIZER PIPELINE JOBS #########################
+## CI for VISUALIZER
+#  - name: dv-ci
+#    type: runSh
+#    steps:
+#      - IN: dv-repo
+#      - IN: docker-creds
+#      - TASK:
+#        - script: sudo apt-get install -y jq
+#        - script: ./IN/dv-repo/gitRepo/build.sh
+#      - OUT: dv-img
+#    on_success:
+#      - script: echo 'on success !!!!!'
+#    on_failure:
+#      - script: echo 'Failed job .... :('
+#
+## manifest gen for VISUALIZER
+#  - name: dv-man
+#    type: manifest
+#    steps:
+#      - IN: dv-img
+#      - IN: dv-img-opts
+#
+## TEST deployment for VISUALIZER
+#  - name: dv-test
+#    type: deploy
+#    steps:
+#      - IN: dv-man
+#      - IN: dv-params
+#      - IN: env-test-aws
+#      - TASK: managed
+
+
+
+
+######################### BOX PIPELINE JOBS #########################
+## CI for BOX
+#  - name: box-ci
+#    type: runSh
+#    steps:
+#      - IN: box-repo
+#      - IN: docker-creds
+#      - TASK:
+#        - script: sudo apt-get install -y jq
+#        - script: ./IN/box-repo/gitRepo/build.sh
+#      - OUT: box-img
+#    on_success:
+#      - script: echo 'on success !!!!!'
+#    on_failure:
+#      - script: echo 'Failed job .... :('
+#
+## manifest gen for BOX
+#  - name: box-man
+#    type: manifest
+#    steps:
+#      - IN: box-img
+#      - IN: box-img-opts
+#
+## TEST deployment for BOX
+#  - name: box-test-aws
+#    type: deploy
+#    steps:
+#      - IN: box-man
+#      - IN: box-t-params
+#      - IN: env-test-aws
+#
+#  - name: box-e2e-test
+#    type: runSh
+#    steps:
+#      - IN: box-repo
+#        switch: off
+#      - IN: box-test-aws
+#      - TASK:
+#        - script: sudo apt-get install -y jq
+#        - script: ./IN/box-repo/gitRepo/test.sh
+#        - script: touch /build/state/success.txt
+#    on_success:
+#      - script: echo 'on success !!!!!'
+#    on_failure:
+#      - script: echo 'Failed job .... :('
+
