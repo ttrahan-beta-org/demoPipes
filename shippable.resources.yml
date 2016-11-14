@@ -39,15 +39,14 @@ resources:
       sourceName: "avinci/demoTestInfra"
       branch: master
 
-## Trigger Image
-#  - name: trig-img
-#    type: image
-#    integration: avinci-dh
-#    pointer:
-#      sourceName: "avinci/dv"
-#    seed:
-#      versionName: "master.7"
-#
+# micro api Image
+  - name: micro-api-img
+    type: image
+    integration: avinci-dh
+    pointer:
+      sourceName: "avinci/micro-api"
+    seed:
+      versionName: "master.1"
 
 ########################## VISUALIZER PIPELINE CODE #########################
 ## CREDS for DOCKER HUB
