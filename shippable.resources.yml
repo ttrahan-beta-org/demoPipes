@@ -5,11 +5,11 @@ resources:
     type: integration
     integration: avi-ecs
 
-## PEM key for AWS demo account
-#  - name: aws-pem
-#    type: integration
-#    integration: avi-demo-pem
-#
+# PEM key for AWS demo account
+  - name: aws-pem
+    type: integration
+    integration: avi-demo-pem
+
 
 ########################### BUILD AMI CODE #########################
 # REPO of AWS demo Infra
@@ -24,28 +24,20 @@ resources:
     type: params
     version:
       params:
-        SOURCE_AMI: "ami-1924770e" #ecs optimized AMI
+        SOURCE_AMI: "ami-c8580bdf" #ecs optimized AMI
         VPC_ID: "vpc-1032db76"
         SUBNET_ID: "subnet-1c0cda20"
         SECURITY_GROUP_ID: "sg-d1c671ac"
         REGION: "us-east-1"
 
 ########################### DEPLOY INFRA CODE #########################
-## REPO of AWS demo Infra
-#  - name: demo-infra-repo
-#    type: gitRepo
-#    integration: "avinci-gh"
-#    pointer:
-#      sourceName: "avinci/demoInfra"
-#      branch: master
-#
-## env vars for Infra action
-#  - name: infra-params
-#    type: params
-#    version:
-#      params:
-#        INFRA_ACTION: "destroy"
-
+# REPO of AWS demo Infra
+  - name: test-infra-repo
+    type: gitRepo
+    integration: "avinci-gh"
+    pointer:
+      sourceName: "avinci/demoInfra"
+      branch: master
 
 ## Trigger Image
 #  - name: trig-img
