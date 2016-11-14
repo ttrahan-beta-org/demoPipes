@@ -83,13 +83,20 @@ resources:
       sourceName : "test-aws"
       region: "us-east-1"
 
-# TEST AWS cluster
+# PROD AWS cluster
   - name: env-prod-aws
     type: cluster
     integration: avi-ecs
     pointer:
       sourceName : "prod-aws"
       region: "us-east-1"
+
+# PROD replica controller for API
+  - name: api-p-scaler
+    type: replicas
+    version:
+      count: 2
+
 
 ########################### API SIT Code #########################
 # REPO of SIT code

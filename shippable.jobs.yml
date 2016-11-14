@@ -85,6 +85,7 @@ jobs:
     type: deploy
     steps:
       - IN: sit
+      - IN: api-p-scaler
       - IN: api-test
         switch: off
       - IN: env-prod-aws
