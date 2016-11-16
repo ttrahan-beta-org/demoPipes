@@ -3,12 +3,7 @@ resources:
 # CREDS for AWS demo account
   - name: aws-creds
     type: integration
-    integration: helen-ecs
-
-# CREDS for AWS demo account
-  - name: vmw-creds
-    type: integration
-    integration: avi-vmw
+    integration: avi-ecs
 
 # PEM key for AWS demo account
   - name: aws-pem
