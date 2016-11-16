@@ -80,17 +80,17 @@ jobs:
       - IN: env-test-aws
       - TASK: managed
 
-## PROD deployment for API
-#  - name: api-prod
-#    type: deploy
-#    steps:
-#      - IN: sit
-#      - IN: api-p-scaler
-#      - IN: api-test
-#        switch: off
-#      - IN: env-prod-aws
-#      - TASK: managed
-#
+# PROD deployment for API
+  - name: api-prod
+    type: deploy
+    steps:
+      - IN: sit
+      - IN: api-p-scaler
+      - IN: api-test
+        switch: off
+      - IN: env-prod-aws
+      - TASK: managed
+
 ####################### SIT JOBS #########################
   - name: sit
     type: runSh
