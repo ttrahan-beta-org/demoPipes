@@ -91,17 +91,17 @@ jobs:
 #      - IN: env-prod-aws
 #      - TASK: managed
 
-######################## SIT JOBS #########################
-#  - name: sit
-#    type: runSh
-#    steps:
-#      - IN: sit-repo
-#      - IN: api-test
-#      - IN: sit-params
-#      - TASK:
-#        - script: sudo apt-get install -y jq
-#        - script: IN/sit-repo/gitRepo/test.sh sit-params
-#    on_success:
-#      - script: touch /build/state/success.txt
-#    on_failure:
-#      - script: touch /build/state/failure.txt
+####################### SIT JOBS #########################
+  - name: sit
+    type: runSh
+    steps:
+      - IN: sit-repo
+      - IN: api-test
+      - IN: sit-params
+      - TASK:
+        - script: sudo apt-get install -y jq
+        - script: IN/sit-repo/gitRepo/test.sh sit-params
+    on_success:
+      - script: touch /build/state/success.txt
+    on_failure:
+      - script: touch /build/state/failure.txt
