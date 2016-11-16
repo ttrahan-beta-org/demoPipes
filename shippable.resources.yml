@@ -66,50 +66,50 @@ resources:
     seed:
       versionName: "master.3"
 
-# Docker Image Options for micro api
-  - name: api-img-opts
-    type: dockerOptions
-    version:
-      memory: 64
-      cpuShares: 256
-      portMappings:
-        - 80:80
-
-# TEST AWS cluster
-  - name: env-test-aws
-    type: cluster
-    integration: avi-ecs
-    pointer:
-      sourceName : "test-aws"
-      region: "us-east-1"
-
-# PROD AWS cluster
-  - name: env-prod-aws
-    type: cluster
-    integration: avi-ecs
-    pointer:
-      sourceName : "prod-aws"
-      region: "us-east-1"
-
-# PROD replica controller for API
-  - name: api-p-scaler
-    type: replicas
-    version:
-      count: 2
+## Docker Image Options for micro api
+#  - name: api-img-opts
+#    type: dockerOptions
+#    version:
+#      memory: 64
+#      cpuShares: 256
+#      portMappings:
+#        - 80:80
+#
+## TEST AWS cluster
+#  - name: env-test-aws
+#    type: cluster
+#    integration: avi-ecs
+#    pointer:
+#      sourceName : "test-aws"
+#      region: "us-east-1"
+#
+## PROD AWS cluster
+#  - name: env-prod-aws
+#    type: cluster
+#    integration: avi-ecs
+#    pointer:
+#      sourceName : "prod-aws"
+#      region: "us-east-1"
+#
+## PROD replica controller for API
+#  - name: api-p-scaler
+#    type: replicas
+#    version:
+#      count: 2
 
 ############################ API SIT Code #########################
-# REPO of SIT code
-  - name: sit-repo
-    type: gitRepo
-    integration: "avinci-gh"
-    pointer:
-      sourceName: avinci/demoSIT
-      branch: master
-
-# SIT env vars for BOX
-  - name: sit-params
-    type: params
-    version:
-      params:
-        API_URL: "54.145.1.103"
-        API_TOKEN: "NA"
+## REPO of SIT code
+#  - name: sit-repo
+#    type: gitRepo
+#    integration: "avinci-gh"
+#    pointer:
+#      sourceName: avinci/demoSIT
+#      branch: master
+#
+## SIT env vars for BOX
+#  - name: sit-params
+#    type: params
+#    version:
+#      params:
+#        API_URL: "54.145.1.103"
+#        API_TOKEN: "NA"
