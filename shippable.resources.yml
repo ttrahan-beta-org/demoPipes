@@ -46,14 +46,14 @@ resources:
     pointer:
       sourceName: "avinci/demoTestInfra"
       branch: master
-
-# REPO of AWS demo Infra
-  - name: prod-infra-repo
-    type: gitRepo
-    integration: "avinci-gh"
-    pointer:
-      sourceName: "avinci/demoProdInfra"
-      branch: master
+#
+## REPO of AWS demo Infra
+#  - name: prod-infra-repo
+#    type: gitRepo
+#    integration: "avinci-gh"
+#    pointer:
+#      sourceName: "avinci/demoProdInfra"
+#      branch: master
 
 ######################### MICRO-API PIPELINE CODE #########################
 #
