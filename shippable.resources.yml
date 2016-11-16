@@ -57,15 +57,15 @@ resources:
 
 ######################### MICRO-API PIPELINE CODE #########################
 #
-## micro api Image
-#  - name: micro-api-img
-#    type: image
-#    integration: avinci-dh
-#    pointer:
-#      sourceName: "avinci/micro-api"
-#    seed:
-#      versionName: "master.3"
-#
+# micro api Image
+  - name: micro-api-img
+    type: image
+    integration: avinci-dh
+    pointer:
+      sourceName: "avinci/micro-api"
+    seed:
+      versionName: "master.3"
+
 ## Docker Image Options for micro api
 #  - name: api-img-opts
 #    type: dockerOptions
