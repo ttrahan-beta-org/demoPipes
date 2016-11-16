@@ -31,22 +31,22 @@ resources:
         REGION: "us-east-1"
 
 ############################ DEPLOY INFRA CODE #########################
-## REPO of AWS demo Infra
-#  - name: setup-infra-repo
-#    type: gitRepo
-#    integration: "avinci-gh"
-#    pointer:
-#      sourceName: "avinci/demoSetupAWS"
-#      branch: master
+# REPO of AWS demo Infra
+  - name: setup-infra-repo
+    type: gitRepo
+    integration: "avinci-gh"
+    pointer:
+      sourceName: "avinci/demoSetupAWS"
+      branch: master
 
-## REPO of AWS demo Infra
-#  - name: test-infra-repo
-#    type: gitRepo
-#    integration: "avinci-gh"
-#    pointer:
-#      sourceName: "avinci/demoTestInfra"
-#      branch: master
-#
+# REPO of AWS demo Infra
+  - name: test-infra-repo
+    type: gitRepo
+    integration: "avinci-gh"
+    pointer:
+      sourceName: "avinci/demoTestInfra"
+      branch: master
+
 ## REPO of AWS demo Infra
 #  - name: prod-infra-repo
 #    type: gitRepo
