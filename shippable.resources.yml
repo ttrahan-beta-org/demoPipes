@@ -64,7 +64,7 @@ resources:
     pointer:
       sourceName: "avinci/micro-api"
     seed:
-      versionName: "master.1"
+      versionName: "master.3"
 
 # Docker Image Options for micro api
   - name: api-img-opts
