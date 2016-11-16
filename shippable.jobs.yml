@@ -1,33 +1,33 @@
 jobs:
 ########################## BUILD AMI #########################
-  - name: build-ami
-    type: runSh
-    steps:
-      - IN: aws-creds
-      - IN: bldami-repo
-      - IN: bldami-params
-      - TASK:
-        - script: sudo apt-get install -y jq
-        - script: IN/bldami-repo/gitRepo/basePack.sh bldami-params
-    on_success:
-      - script: echo "SUCCESS"
-    on_failure:
-      - script: cat /build/IN/bldami-repo/gitRepo/output.txt
-
-########################## DEPLOY AWS INFRA #########################
-  - name: aws-infra-setup
-    type: runSh
-    steps:
-      - IN: aws-pem
-      - IN: aws-creds
-      - IN: setup-infra-repo
-      - TASK:
-        - script: sudo apt-get install -y jq
-        - script: IN/setup-infra-repo/gitRepo/build.sh
-    on_success:
-      - script: /build/IN/setup-infra-repo/gitRepo/archiveState.sh
-    on_failure:
-      - script: /build/IN/setup-infra-repo/gitRepo/archiveState.sh
+#  - name: build-ami
+#    type: runSh
+#    steps:
+#      - IN: aws-creds
+#      - IN: bldami-repo
+#      - IN: bldami-params
+#      - TASK:
+#        - script: sudo apt-get install -y jq
+#        - script: IN/bldami-repo/gitRepo/basePack.sh bldami-params
+#    on_success:
+#      - script: echo "SUCCESS"
+#    on_failure:
+#      - script: cat /build/IN/bldami-repo/gitRepo/output.txt
+#
+########################### DEPLOY AWS INFRA #########################
+#  - name: aws-infra-setup
+#    type: runSh
+#    steps:
+#      - IN: aws-pem
+#      - IN: aws-creds
+#      - IN: setup-infra-repo
+#      - TASK:
+#        - script: sudo apt-get install -y jq
+#        - script: IN/setup-infra-repo/gitRepo/build.sh
+#    on_success:
+#      - script: /build/IN/setup-infra-repo/gitRepo/archiveState.sh
+#    on_failure:
+#      - script: /build/IN/setup-infra-repo/gitRepo/archiveState.sh
 #
 #  - name: test-infra-prov
 #    type: runSh
