@@ -1,59 +1,59 @@
 resources:
 ########################### Credentials #########################
-# CREDS for AWS demo account
-  - name: aws-creds
-    type: integration
-    integration: avi-ecs
+## CREDS for AWS demo account
+#  - name: aws-creds
+#    type: integration
+#    integration: avi-ecs
+#
+## PEM key for AWS demo account
+#  - name: aws-pem
+#    type: integration
+#    integration: avi-demo-pem
+#
+#
+############################# BUILD AMI CODE #########################
+## REPO of AWS demo Infra
+#  - name: bldami-repo
+#    type: gitRepo
+#    integration: "avinci-gh"
+#    pointer:
+#      sourceName: "avinci/demoBuildAMI"
+#      branch: master
+#
+#  - name: bldami-params
+#    type: params
+#    version:
+#      params:
+#        SOURCE_AMI: "ami-c8580bdf" #ecs optimized AMI
+#        VPC_ID: "vpc-1032db76"
+#        SUBNET_ID: "subnet-1c0cda20"
+#        SECURITY_GROUP_ID: "sg-d1c671ac"
+#        REGION: "us-east-1"
 
-# PEM key for AWS demo account
-  - name: aws-pem
-    type: integration
-    integration: avi-demo-pem
-
-
-############################ BUILD AMI CODE #########################
-# REPO of AWS demo Infra
-  - name: bldami-repo
-    type: gitRepo
-    integration: "avinci-gh"
-    pointer:
-      sourceName: "avinci/demoBuildAMI"
-      branch: master
-
-  - name: bldami-params
-    type: params
-    version:
-      params:
-        SOURCE_AMI: "ami-c8580bdf" #ecs optimized AMI
-        VPC_ID: "vpc-1032db76"
-        SUBNET_ID: "subnet-1c0cda20"
-        SECURITY_GROUP_ID: "sg-d1c671ac"
-        REGION: "us-east-1"
-
-############################ DEPLOY INFRA CODE #########################
-# REPO of AWS demo Infra
-  - name: setup-infra-repo
-    type: gitRepo
-    integration: "avinci-gh"
-    pointer:
-      sourceName: "avinci/demoSetupAWS"
-      branch: master
-
-# REPO of AWS demo Infra
-  - name: test-infra-repo
-    type: gitRepo
-    integration: "avinci-gh"
-    pointer:
-      sourceName: "avinci/demoTestInfra"
-      branch: master
-
-# REPO of AWS demo Infra
-  - name: prod-infra-repo
-    type: gitRepo
-    integration: "avinci-gh"
-    pointer:
-      sourceName: "avinci/demoProdInfra"
-      branch: master
+############################# DEPLOY INFRA CODE #########################
+## REPO of AWS demo Infra
+#  - name: setup-infra-repo
+#    type: gitRepo
+#    integration: "avinci-gh"
+#    pointer:
+#      sourceName: "avinci/demoSetupAWS"
+#      branch: master
+#
+## REPO of AWS demo Infra
+#  - name: test-infra-repo
+#    type: gitRepo
+#    integration: "avinci-gh"
+#    pointer:
+#      sourceName: "avinci/demoTestInfra"
+#      branch: master
+#
+## REPO of AWS demo Infra
+#  - name: prod-infra-repo
+#    type: gitRepo
+#    integration: "avinci-gh"
+#    pointer:
+#      sourceName: "avinci/demoProdInfra"
+#      branch: master
 
 ########################## MICRO-API PIPELINE CODE #########################
 
