@@ -63,23 +63,23 @@ jobs:
     on_failure:
       - script: /build/IN/prod-infra-repo/gitRepo/archiveState.sh
 
-########################## API PIPELINE JOBS #########################
-## manifest gen for API
-#  - name: api-man
-#    type: manifest
-#    steps:
-#      - IN: micro-api-img
-#      - IN: api-img-opts
-#      - IN: test-infra-prov
-#
-## TEST deployment for API
-#  - name: api-test
-#    type: deploy
-#    steps:
-#      - IN: api-man
-#      - IN: env-test-aws
-#      - TASK: managed
-#
+######################### API PIPELINE JOBS #########################
+# manifest gen for API
+  - name: api-man
+    type: manifest
+    steps:
+      - IN: micro-api-img
+      - IN: api-img-opts
+      - IN: test-infra-prov
+
+# TEST deployment for API
+  - name: api-test
+    type: deploy
+    steps:
+      - IN: api-man
+      - IN: env-test-aws
+      - TASK: managed
+
 ## PROD deployment for API
 #  - name: api-prod
 #    type: deploy

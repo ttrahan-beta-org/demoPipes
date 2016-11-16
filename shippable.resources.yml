@@ -66,23 +66,23 @@ resources:
     seed:
       versionName: "master.3"
 
-## Docker Image Options for micro api
-#  - name: api-img-opts
-#    type: dockerOptions
-#    version:
-#      memory: 64
-#      cpuShares: 256
-#      portMappings:
-#        - 80:80
-#
-## TEST AWS cluster
-#  - name: env-test-aws
-#    type: cluster
-#    integration: avi-ecs
-#    pointer:
-#      sourceName : "test-aws"
-#      region: "us-east-1"
-#
+# Docker Image Options for micro api
+  - name: api-img-opts
+    type: dockerOptions
+    version:
+      memory: 64
+      cpuShares: 256
+      portMappings:
+        - 80:80
+
+# TEST AWS cluster
+  - name: env-test-aws
+    type: cluster
+    integration: avi-ecs
+    pointer:
+      sourceName : "test-aws"
+      region: "us-east-1"
+
 ## PROD AWS cluster
 #  - name: env-prod-aws
 #    type: cluster
