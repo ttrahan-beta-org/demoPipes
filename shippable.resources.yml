@@ -78,72 +78,72 @@ resources:
       branch: master
 
 ###################### DOCKER Based WAR CI/CD RESOURCES #######################
-# Docker credentials
-  - name: docker-creds
-    type: integration
-    integration: avinci-dh
-
-# Source code for sample WAR app
-  - name: demo-doc-repo
-    type: gitRepo
-    integration: "avinci-gh"
-    pointer:
-      sourceName: "avinci/samplejavatomcat"
-      branch: docker
-
-# Docker Image packaging sample WAR
-  - name: demo-doc-img
-    type: image
-    integration: avinci-dh
-    pointer:
-      sourceName: "avinci/sample"
-    seed:
-      versionName: "latest"
-
-# Docker Options for packaged WAR
-  - name: doc-img-opts
-    type: dockerOptions
-    version:
-      memory: 256
-      cpuShares: 256
-      portMappings:
-        - 8080:8080
-
-# Reference to ECS Test Cluster
-  - name: env-test-aws
-    type: cluster
-    integration: avi-ecs
-    pointer:
-      sourceName : "test-aws"
-      region: "us-east-1"
-
-# Reference to ECS PROD Cluster
-  - name: env-prod-aws
-    type: cluster
-    integration: avi-ecs
-    pointer:
-      sourceName : "prod-aws"
-      region: "us-east-1"
-
-# Number of packaged WARs to deploy to Prod
-  - name: doc-p-scaler
-    type: replicas
-    version:
-      count: 2
-
-############################# WAR SIT RESOURCES #########################
-# REPO of SIT code
-  - name: sit-repo
-    type: gitRepo
-    integration: "avinci-gh"
-    pointer:
-      sourceName: avinci/demoSIT
-      branch: master
-
-# SIT env vars for BOX
-  - name: sit-params
-    type: params
-    version:
-      params:
-        API_URL: "54.227.103.6:8080"
-        API_TOKEN: "NA"
+## Docker credentials
+#  - name: docker-creds
+#    type: integration
+#    integration: avinci-dh
+#
+## Source code for sample WAR app
+#  - name: demo-doc-repo
+#    type: gitRepo
+#    integration: "avinci-gh"
+#    pointer:
+#      sourceName: "avinci/samplejavatomcat"
+#      branch: docker
+#
+## Docker Image packaging sample WAR
+#  - name: demo-doc-img
+#    type: image
+#    integration: avinci-dh
+#    pointer:
+#      sourceName: "avinci/sample"
+#    seed:
+#      versionName: "latest"
+#
+## Docker Options for packaged WAR
+#  - name: doc-img-opts
+#    type: dockerOptions
+#    version:
+#      memory: 256
+#      cpuShares: 256
+#      portMappings:
+#        - 8080:8080
+#
+## Reference to ECS Test Cluster
+#  - name: env-test-aws
+#    type: cluster
+#    integration: avi-ecs
+#    pointer:
+#      sourceName : "test-aws"
+#      region: "us-east-1"
+#
+## Reference to ECS PROD Cluster
+#  - name: env-prod-aws
+#    type: cluster
+#    integration: avi-ecs
+#    pointer:
+#      sourceName : "prod-aws"
+#      region: "us-east-1"
+#
+## Number of packaged WARs to deploy to Prod
+#  - name: doc-p-scaler
+#    type: replicas
+#    version:
+#      count: 2
+#
+############################## WAR SIT RESOURCES #########################
+## REPO of SIT code
+#  - name: sit-repo
+#    type: gitRepo
+#    integration: "avinci-gh"
+#    pointer:
+#      sourceName: avinci/demoSIT
+#      branch: master
+#
+## SIT env vars for BOX
+#  - name: sit-params
+#    type: params
+#    version:
+#      params:
+#        API_URL: "54.227.103.6:8080"
+#        API_TOKEN: "NA"
