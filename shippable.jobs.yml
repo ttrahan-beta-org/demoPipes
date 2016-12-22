@@ -115,6 +115,8 @@ jobs:
   - name: demo-doc-prod
     type: deploy
     steps:
+      - IN: prod-infra-prov
+        switch: off
       - IN: doc-p-scaler
       - IN: demo-doc-test
         switch: off
