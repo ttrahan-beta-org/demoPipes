@@ -95,23 +95,23 @@ jobs:
     on_failure:
       - script: echo "FAILED"
 
-########################## API PIPELINE JOBS #########################
-## manifest gen for API
-#  - name: api-man
-#    type: manifest
-#    steps:
-#      - IN: micro-api-img
-#      - IN: api-img-opts
-#      - IN: test-infra-prov
-#
-## TEST deployment for API
-#  - name: api-test
-#    type: deploy
-#    steps:
-#      - IN: api-man
-#      - IN: env-test-aws
-#      - TASK: managed
-#
+########################## CI/CD DOCKER PIPELINE JOBS #########################
+# manifest gen for docker WAR
+  - name: demo-doc-man
+    type: manifest
+    steps:
+      - IN: demo-doc-img
+      - IN: doc-img-opts
+      - IN: test-infra-prov
+
+# TEST deployment for docker WAR
+  - name: demo-doc-test
+    type: deploy
+    steps:
+      - IN: demo-doc-man
+      - IN: env-test-aws
+      - TASK: managed
+
 ## PROD deployment for API
 #  - name: api-prod
 #    type: deploy
