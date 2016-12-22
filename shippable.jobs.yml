@@ -62,23 +62,22 @@ jobs:
     on_failure:
       - script: /build/IN/test-infra-repo/gitRepo/archiveState.sh
 
-#  - name: prod-infra-prov
-#    type: runSh
-#    steps:
-#      - IN: aws-pem
-#      - IN: aws-creds
-#      - IN: prod-infra-repo
-#      - IN: aws-infra-setup
-#      - IN: build-ami
-#        switch: off
-#      - TASK:
-#        - script: sudo apt-get install -y jq
-#        - script: IN/prod-infra-repo/gitRepo/build.sh
-#    on_success:
-#      - script: /build/IN/prod-infra-repo/gitRepo/archiveState.sh
-#    on_failure:
-#      - script: /build/IN/prod-infra-repo/gitRepo/archiveState.sh
-
+  - name: prod-infra-prov
+    type: runSh
+    steps:
+      - IN: aws-pem
+      - IN: aws-creds
+      - IN: prod-infra-repo
+      - IN: aws-infra-setup
+      - IN: build-ami
+        switch: off
+      - TASK:
+        - script: sudo apt-get install -y jq
+        - script: IN/prod-infra-repo/gitRepo/build.sh
+    on_success:
+      - script: /build/IN/prod-infra-repo/gitRepo/archiveState.sh
+    on_failure:
+      - script: /build/IN/prod-infra-repo/gitRepo/archiveState.sh
 
 ######################### BUILD WAR DOCKER #########################
   - name: build-doc-war
@@ -112,17 +111,16 @@ jobs:
       - IN: env-test-aws
       - TASK: managed
 
-## PROD deployment for API
-#  - name: api-prod
-#    type: deploy
-#    steps:
-#      - IN: sit
-#      - IN: api-p-scaler
-#      - IN: api-test
-#        switch: off
-#      - IN: env-prod-aws
-#      - TASK: managed
-#
+# PROD deployment for API
+  - name: api-prod
+    type: deploy
+    steps:
+      - IN: doc-p-scaler
+      - IN: demo-doc-test
+        switch: off
+      - IN: env-prod-aws
+      - TASK: managed
+
 ######################### SIT JOBS #########################
 #  - name: sit
 #    type: runSh
