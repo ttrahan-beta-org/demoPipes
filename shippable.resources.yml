@@ -61,7 +61,7 @@ resources:
     type: image
     integration: avinci-dh
     pointer:
-      sourceName: "HelloWorld.jar"
+      sourceName: "sample.jar"
     seed:
       versionName: "latest"
 
