@@ -51,13 +51,13 @@ resources:
       sourceName: "avinci/demoTestInfra"
       branch: master
 
-## REPO of AWS demo Infra
-#  - name: prod-infra-repo
-#    type: gitRepo
-#    integration: "avinci-gh"
-#    pointer:
-#      sourceName: "avinci/demoProdInfra"
-#      branch: master
+# REPO of AWS demo Infra
+  - name: prod-infra-repo
+    type: gitRepo
+    integration: "avinci-gh"
+    pointer:
+      sourceName: "avinci/demoProdInfra"
+      branch: master
 
 ######################### WAR CI/CD PIPELINE CODE #########################
 # jar trigger
