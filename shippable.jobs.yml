@@ -13,7 +13,7 @@ jobs:
       - IN: demo-war-test-cls
       - TASK:
         - script: sudo rm -rf /var/lib/tomcat7/webapps/*
-        - script: cp /tmp/shippable/demo-war-manifest/demo-jar/sample.war /var/lib/tomcat7/webapps/sample.war
+        - script: cp /tmp/shippable/demo-war-manifest/demo-war/sample.war /var/lib/tomcat7/webapps/sample.war
 
 ######################### BUILD AMI #########################
 #  - name: build-ami
