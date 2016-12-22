@@ -8,74 +8,74 @@ resources:
       sourceName: "sample.war"
     seed:
       versionName: "latest"
-
-# VM Cluster
-  - name: demo-war-test-cls
-    type: cluster
-    integration: demo-test-cls
-
-# JFROG WAR reference
-  - name: demo-war
-    type: file
-    integration: avinci-jf
-    pointer:
-      sourceName: builds/sample.war
-    seed:
-      versionName: initial
-
-###################### INFRA AUTOMATION RESOURCES #########################
-# AWS credentials
-  - name: aws-creds
-    type: integration
-    integration: avi-ecs
-
-# AWS pem key
-  - name: aws-pem
-    type: integration
-    integration: avi-demo-pem
-
-# Packer Code for building AMI
-  - name: bldami-repo
-    type: gitRepo
-    integration: "avinci-gh"
-    pointer:
-      sourceName: "avinci/demoBuildAMI"
-      branch: master
-
-# Parameters to provision AMI Builder
-  - name: bldami-params
-    type: params
-    version:
-      params:
-        SOURCE_AMI: "ami-c8580bdf" #ecs optimized AMI
-        VPC_ID: "vpc-1032db76"
-        SUBNET_ID: "subnet-1c0cda20"
-        SECURITY_GROUP_ID: "sg-d1c671ac"
-        REGION: "us-east-1"
-
-# Terraform code to setup AWS IAM
-  - name: setup-infra-repo
-    type: gitRepo
-    integration: "avinci-gh"
-    pointer:
-      sourceName: "avinci/demoSetupAWS"
-      branch: master
-
-# Terraform code to setup AWS Test VMs and Container Services
-  - name: test-infra-repo
-    type: gitRepo
-    integration: "avinci-gh"
-    pointer:
-      sourceName: "avinci/demoTestInfra"
-      branch: master
-
-# Terraform code to setup AWS Prod VMs and Container Services
-  - name: prod-infra-repo
-    type: gitRepo
-    integration: "avinci-gh"
-    pointer:
-      sourceName: "avinci/demoProdInfra"
-      branch: master
+#
+## VM Cluster
+#  - name: demo-war-test-cls
+#    type: cluster
+#    integration: demo-test-cls
+#
+## JFROG WAR reference
+#  - name: demo-war
+#    type: file
+#    integration: avinci-jf
+#    pointer:
+#      sourceName: builds/sample.war
+#    seed:
+#      versionName: initial
+#
+####################### INFRA AUTOMATION RESOURCES #########################
+## AWS credentials
+#  - name: aws-creds
+#    type: integration
+#    integration: avi-ecs
+#
+## AWS pem key
+#  - name: aws-pem
+#    type: integration
+#    integration: avi-demo-pem
+#
+## Packer Code for building AMI
+#  - name: bldami-repo
+#    type: gitRepo
+#    integration: "avinci-gh"
+#    pointer:
+#      sourceName: "avinci/demoBuildAMI"
+#      branch: master
+#
+## Parameters to provision AMI Builder
+#  - name: bldami-params
+#    type: params
+#    version:
+#      params:
+#        SOURCE_AMI: "ami-c8580bdf" #ecs optimized AMI
+#        VPC_ID: "vpc-1032db76"
+#        SUBNET_ID: "subnet-1c0cda20"
+#        SECURITY_GROUP_ID: "sg-d1c671ac"
+#        REGION: "us-east-1"
+#
+## Terraform code to setup AWS IAM
+#  - name: setup-infra-repo
+#    type: gitRepo
+#    integration: "avinci-gh"
+#    pointer:
+#      sourceName: "avinci/demoSetupAWS"
+#      branch: master
+#
+## Terraform code to setup AWS Test VMs and Container Services
+#  - name: test-infra-repo
+#    type: gitRepo
+#    integration: "avinci-gh"
+#    pointer:
+#      sourceName: "avinci/demoTestInfra"
+#      branch: master
+#
+## Terraform code to setup AWS Prod VMs and Container Services
+#  - name: prod-infra-repo
+#    type: gitRepo
+#    integration: "avinci-gh"
+#    pointer:
+#      sourceName: "avinci/demoProdInfra"
+#      branch: master
 
 ###################### DOCKER Based WAR CI/CD RESOURCES #######################
 ## Docker credentials
