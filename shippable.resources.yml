@@ -57,11 +57,11 @@ resources:
 
 ######################### MICRO-API PIPELINE CODE #########################
 # jar trigger
-  - name: demo-jar-trg
+  - name: demo-war-trg
     type: image
     integration: avinci-dh
     pointer:
-      sourceName: "sample.jar"
+      sourceName: "sample.war"
     seed:
       versionName: "latest"
 
