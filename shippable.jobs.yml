@@ -2,7 +2,7 @@ jobs:
   - name: demo-war-manifest
     type: manifest
     steps:
-      - IN: demo-jar
+      - IN: demo-war
       - IN: demo-jar-trg
 
   - name: demo-jar-test-deploy

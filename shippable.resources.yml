@@ -65,11 +65,11 @@ resources:
     seed:
       versionName: "latest"
 
-  - name: demo-jar
+  - name: demo-war
     type: file
     integration: avinci-jf
     pointer:
-      sourceName: builds/HelloWorld.war
+      sourceName: builds/sample.war
     seed:
       versionName: initial
 
