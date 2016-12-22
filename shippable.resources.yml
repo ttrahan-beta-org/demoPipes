@@ -76,6 +76,14 @@ resources:
     seed:
       versionName: initial
 
+# REPO of AWS demo Infra
+  - name: demo-doc-repo
+    type: gitRepo
+    integration: "avinci-gh"
+    pointer:
+      sourceName: "avinci/samplejavatomcat"
+      branch: docker
+
 # Docker sample Image
   - name: demo-doc-img
     type: image
@@ -92,7 +100,7 @@ resources:
       memory: 256
       cpuShares: 256
       portMappings:
-        - 80:80
+        - 8080:8080
 
 # TEST AWS cluster
   - name: env-test-aws
