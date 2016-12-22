@@ -1,4 +1,19 @@
 jobs:
+  - name: demo-war-manifest
+    type: manifest
+    steps:
+      - IN: demo-jar
+      - IN: demo-jar-trg
+
+  - name: demo-jar-test-deploy
+    type: deploy
+    steps:
+      - IN: demo-war-manifest
+        force: true
+      - IN: demo-war-test-cls
+      - TASK:
+        - script: pwd
+
 ######################### BUILD AMI #########################
 #  - name: build-ami
 #    type: runSh

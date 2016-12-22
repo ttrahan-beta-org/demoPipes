@@ -65,6 +65,18 @@ resources:
     seed:
       versionName: "latest"
 
+  - name: demo-jar
+    type: file
+    integration: avinci-jf
+    pointer:
+      sourceName: builds/HelloWorld.war
+    seed:
+      versionName: initial
+
+  - name: demo-war-test-cls
+    type: cluster
+    integration: demo-test-cls
+
 # micro api Image
 #  - name: micro-api-img
 #    type: image
