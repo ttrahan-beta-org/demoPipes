@@ -5,16 +5,6 @@ jobs:
       - IN: demo-war
       - IN: demo-war-trg
 
-  - name: demo-jar-test-deploy
-    type: deploy
-    steps:
-      - IN: demo-war-manifest
-        force: true
-      - IN: demo-war-test-cls
-      - TASK:
-        - script: sudo rm -rf /var/lib/tomcat7/webapps/*
-        - script: sudo cp /tmp/shippable/demo-war-manifest/demo-war/sample.war /var/lib/tomcat7/webapps/sample.war
-
   - name: demo-war-test-deploy
     type: deploy
     steps:
