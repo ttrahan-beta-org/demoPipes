@@ -1,13 +1,13 @@
 resources:
 ###################### NATIVE WAR CI/CD RESOURCES #########################
-# jar trigger
-  - name: demo-war-trg
-    type: image
-    integration: avinci-dh
-    pointer:
-      sourceName: "sample.war"
-    seed:
-      versionName: "latest"
+## jar trigger
+#  - name: demo-war-trg
+#    type: image
+#    integration: avinci-dh
+#    pointer:
+#      sourceName: "sample.war"
+#    seed:
+#      versionName: "latest"
 #
 ## VM Cluster
 #  - name: demo-war-test-cls
