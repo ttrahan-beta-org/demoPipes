@@ -31,37 +31,37 @@ jobs:
       - script: cat /build/IN/bldami-repo/gitRepo/output.txt
 
 ############################ DEPLOY AWS INFRA #########################
-#  - name: aws-infra-setup
-#    type: runSh
-#    steps:
-#      - IN: aws-pem
-#      - IN: aws-creds
-#      - IN: setup-infra-repo
-#      - TASK:
-#        - script: sudo apt-get install -y jq
-#        - script: IN/setup-infra-repo/gitRepo/build.sh
-#    on_success:
-#      - script: /build/IN/setup-infra-repo/gitRepo/archiveState.sh
-#    on_failure:
-#      - script: /build/IN/setup-infra-repo/gitRepo/archiveState.sh
-#
-#  - name: test-infra-prov
-#    type: runSh
-#    steps:
-#      - IN: aws-pem
-#      - IN: aws-creds
-#      - IN: test-infra-repo
-#      - IN: aws-infra-setup
-#      - IN: build-ami
-#        switch: off
-#      - TASK:
-#        - script: sudo apt-get install -y jq
-#        - script: IN/test-infra-repo/gitRepo/build.sh
-#    on_success:
-#      - script: /build/IN/test-infra-repo/gitRepo/archiveState.sh
-#    on_failure:
-#      - script: /build/IN/test-infra-repo/gitRepo/archiveState.sh
-#
+  - name: aws-infra-setup
+    type: runSh
+    steps:
+      - IN: aws-pem
+      - IN: aws-creds
+      - IN: setup-infra-repo
+      - TASK:
+        - script: sudo apt-get install -y jq
+        - script: IN/setup-infra-repo/gitRepo/build.sh
+    on_success:
+      - script: /build/IN/setup-infra-repo/gitRepo/archiveState.sh
+    on_failure:
+      - script: /build/IN/setup-infra-repo/gitRepo/archiveState.sh
+
+  - name: test-infra-prov
+    type: runSh
+    steps:
+      - IN: aws-pem
+      - IN: aws-creds
+      - IN: test-infra-repo
+      - IN: aws-infra-setup
+      - IN: build-ami
+        switch: off
+      - TASK:
+        - script: sudo apt-get install -y jq
+        - script: IN/test-infra-repo/gitRepo/build.sh
+    on_success:
+      - script: /build/IN/test-infra-repo/gitRepo/archiveState.sh
+    on_failure:
+      - script: /build/IN/test-infra-repo/gitRepo/archiveState.sh
+
 #  - name: prod-infra-prov
 #    type: runSh
 #    steps:
