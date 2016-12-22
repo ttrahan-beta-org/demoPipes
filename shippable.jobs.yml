@@ -112,7 +112,7 @@ jobs:
       - TASK: managed
 
 # PROD deployment for API
-  - name: api-prod
+  - name: demo-doc-prod
     type: deploy
     steps:
       - IN: doc-p-scaler
