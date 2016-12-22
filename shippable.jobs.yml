@@ -86,48 +86,48 @@ jobs:
       - script: /build/IN/prod-infra-repo/gitRepo/archiveState.sh
 
 ###################### DOCKER Based WAR CI/CD JOBS #######################
-## package sample WAR into docker container
-#  - name: build-doc-war
-#    type: runSh
-#    steps:
-#      - IN: docker-creds
-#      - IN: demo-doc-repo
-#      - TASK:
-#        - script: sudo apt-get install -y jq
-#        - script: IN/demo-doc-repo/gitRepo/build.sh
-#      - OUT: demo-doc-img
-#    on_success:
-#      - script: echo "SUCCESS"
-#    on_failure:
-#      - script: echo "FAILED"
-#
-##  manifest that defines the DOCKER WAR service definition
-#  - name: demo-doc-man
-#    type: manifest
-#    steps:
-#      - IN: demo-doc-img
-#      - IN: doc-img-opts
-#      - IN: test-infra-prov
-#
-## deploy job that deploys native war to TEST ECS Cluster
-#  - name: demo-doc-test
-#    type: deploy
-#    steps:
-#      - IN: demo-doc-man
-#      - IN: env-test-aws
-#      - TASK: managed
-#
-## deploy job that deploys native war to PROD ECS Cluster
-#  - name: demo-doc-prod
-#    type: deploy
-#    steps:
-#      - IN: prod-infra-prov
-#        switch: off
-#      - IN: doc-p-scaler
-#      - IN: demo-doc-test
-#        switch: off
-#      - IN: env-prod-aws
-#      - TASK: managed
+# package sample WAR into docker container
+  - name: build-doc-war
+    type: runSh
+    steps:
+      - IN: docker-creds
+      - IN: demo-doc-repo
+      - TASK:
+        - script: sudo apt-get install -y jq
+        - script: IN/demo-doc-repo/gitRepo/build.sh
+      - OUT: demo-doc-img
+    on_success:
+      - script: echo "SUCCESS"
+    on_failure:
+      - script: echo "FAILED"
+
+#  manifest that defines the DOCKER WAR service definition
+  - name: demo-doc-man
+    type: manifest
+    steps:
+      - IN: demo-doc-img
+      - IN: doc-img-opts
+      - IN: test-infra-prov
+
+# deploy job that deploys native war to TEST ECS Cluster
+  - name: demo-doc-test
+    type: deploy
+    steps:
+      - IN: demo-doc-man
+      - IN: env-test-aws
+      - TASK: managed
+
+# deploy job that deploys native war to PROD ECS Cluster
+  - name: demo-doc-prod
+    type: deploy
+    steps:
+      - IN: prod-infra-prov
+        switch: off
+      - IN: doc-p-scaler
+      - IN: demo-doc-test
+        switch: off
+      - IN: env-prod-aws
+      - TASK: managed
 
 ######################### WAR SIT JOBS #########################
 ## job to run SIT testing
