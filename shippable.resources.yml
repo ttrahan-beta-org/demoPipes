@@ -54,7 +54,7 @@ resources:
 #      sourceName: "avinci/demoProdInfra"
 #      branch: master
 
-######################### MICRO-API PIPELINE CODE #########################
+######################### WAR CI/CD PIPELINE CODE #########################
 # jar trigger
   - name: demo-war-trg
     type: image
@@ -64,6 +64,10 @@ resources:
     seed:
       versionName: "latest"
 
+  - name: demo-war-test-cls
+    type: cluster
+    integration: demo-test-cls
+
   - name: demo-war
     type: file
     integration: avinci-jf
@@ -72,36 +76,32 @@ resources:
     seed:
       versionName: initial
 
-  - name: demo-war-test-cls
+# Docker sample Image
+  - name: demo-doc-img
+    type: image
+    integration: avinci-dh
+    pointer:
+      sourceName: "avinci/sample"
+    seed:
+      versionName: "latest"
+
+# Docker Image Options for micro api
+  - name: doc-img-opts
+    type: dockerOptions
+    version:
+      memory: 256
+      cpuShares: 256
+      portMappings:
+        - 80:80
+
+# TEST AWS cluster
+  - name: env-test-aws
     type: cluster
-    integration: demo-test-cls
+    integration: avi-ecs
+    pointer:
+      sourceName : "test-aws"
+      region: "us-east-1"
 
-# micro api Image
-#  - name: micro-api-img
-#    type: image
-#    integration: avinci-dh
-#    pointer:
-#      sourceName: "avinci/micro-api"
-#    seed:
-#      versionName: "master.3"
-
-## Docker Image Options for micro api
-#  - name: api-img-opts
-#    type: dockerOptions
-#    version:
-#      memory: 64
-#      cpuShares: 256
-#      portMappings:
-#        - 80:80
-#
-## TEST AWS cluster
-#  - name: env-test-aws
-#    type: cluster
-#    integration: avi-ecs
-#    pointer:
-#      sourceName : "test-aws"
-#      region: "us-east-1"
-#
 ## PROD AWS cluster
 #  - name: env-prod-aws
 #    type: cluster
