@@ -16,19 +16,19 @@ jobs:
         - script: sudo cp /tmp/shippable/demo-war-manifest/demo-war/sample.war /var/lib/tomcat7/webapps/sample.war
 
 ######################### BUILD AMI #########################
-#  - name: build-ami
-#    type: runSh
-#    steps:
-#      - IN: aws-creds
-#      - IN: bldami-repo
-#      - IN: bldami-params
-#      - TASK:
-#        - script: sudo apt-get install -y jq
-#        - script: IN/bldami-repo/gitRepo/basePack.sh bldami-params
-#    on_success:
-#      - script: echo "SUCCESS"
-#    on_failure:
-#      - script: cat /build/IN/bldami-repo/gitRepo/output.txt
+  - name: build-ami
+    type: runSh
+    steps:
+      - IN: aws-creds
+      - IN: bldami-repo
+      - IN: bldami-params
+      - TASK:
+        - script: sudo apt-get install -y jq
+        - script: IN/bldami-repo/gitRepo/basePack.sh bldami-params
+    on_success:
+      - script: echo "SUCCESS"
+    on_failure:
+      - script: cat /build/IN/bldami-repo/gitRepo/output.txt
 
 ############################ DEPLOY AWS INFRA #########################
 #  - name: aws-infra-setup
