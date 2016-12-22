@@ -56,15 +56,23 @@ resources:
 #      branch: master
 
 ######################### MICRO-API PIPELINE CODE #########################
-
-# micro api Image
-  - name: micro-api-img
+# jar trigger
+  - name: demo-jar-trg
     type: image
     integration: avinci-dh
     pointer:
-      sourceName: "avinci/micro-api"
+      sourceName: "HelloWorld.jar"
     seed:
-      versionName: "master.3"
+      versionName: "latest"
+
+# micro api Image
+#  - name: micro-api-img
+#    type: image
+#    integration: avinci-dh
+#    pointer:
+#      sourceName: "avinci/micro-api"
+#    seed:
+#      versionName: "master.3"
 
 ## Docker Image Options for micro api
 #  - name: api-img-opts
