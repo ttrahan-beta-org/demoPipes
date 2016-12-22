@@ -132,18 +132,18 @@ resources:
       count: 2
 
 ############################# WAR SIT RESOURCES #########################
-## REPO of SIT code
-#  - name: sit-repo
-#    type: gitRepo
-#    integration: "avinci-gh"
-#    pointer:
-#      sourceName: avinci/demoSIT
-#      branch: master
-#
-## SIT env vars for BOX
-#  - name: sit-params
-#    type: params
-#    version:
-#      params:
-#        API_URL: "54.145.1.103"
-#        API_TOKEN: "NA"
+# REPO of SIT code
+  - name: sit-repo
+    type: gitRepo
+    integration: "avinci-gh"
+    pointer:
+      sourceName: avinci/demoSIT
+      branch: master
+
+# SIT env vars for BOX
+  - name: sit-params
+    type: params
+    version:
+      params:
+        API_URL: "54.227.103.6:8080"
+        API_TOKEN: "NA"

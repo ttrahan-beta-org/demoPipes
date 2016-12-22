@@ -124,23 +124,22 @@ jobs:
       - IN: prod-infra-prov
         switch: off
       - IN: doc-p-scaler
-      - IN: demo-doc-test
-        switch: off
+      - IN: sit
       - IN: env-prod-aws
       - TASK: managed
 
 ######################### WAR SIT JOBS #########################
-## job to run SIT testing
-#  - name: sit
-#    type: runSh
-#    steps:
-#      - IN: sit-repo
-#      - IN: demo-doc-test
-#      - IN: sit-params
-#      - TASK:
-#        - script: sudo apt-get install -y jq
-#        - script: IN/sit-repo/gitRepo/test.sh sit-params
-#    on_success:
-#      - script: touch /build/state/success.txt
-#    on_failure:
-#      - script: touch /build/state/failure.txt
+# job to run SIT testing
+  - name: sit
+    type: runSh
+    steps:
+      - IN: sit-repo
+      - IN: demo-doc-test
+      - IN: sit-params
+      - TASK:
+        - script: sudo apt-get install -y jq
+        - script: IN/sit-repo/gitRepo/test.sh sit-params
+    on_success:
+      - script: touch /build/state/success.txt
+    on_failure:
+      - script: touch /build/state/failure.txt
