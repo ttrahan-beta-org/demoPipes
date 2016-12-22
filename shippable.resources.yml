@@ -1,6 +1,11 @@
 resources:
 ########################## Credentials #########################
 # CREDS for AWS demo account
+  - name: docker-creds
+    type: integration
+    integration: avinci-dh
+
+# CREDS for AWS demo account
   - name: aws-creds
     type: integration
     integration: avi-ecs

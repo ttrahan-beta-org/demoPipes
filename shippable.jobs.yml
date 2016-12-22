@@ -79,6 +79,22 @@ jobs:
 #    on_failure:
 #      - script: /build/IN/prod-infra-repo/gitRepo/archiveState.sh
 
+
+######################### BUILD WAR DOCKER #########################
+  - name: build-doc-war
+    type: runSh
+    steps:
+      - IN: docker-creds
+      - IN: demo-doc-repo
+      - TASK:
+        - script: sudo apt-get install -y jq
+        - script: IN/demo-doc-repo/gitRepo/build.sh
+      - OUT: demo-doc-img
+    on_success:
+      - script: echo "SUCCESS"
+    on_failure:
+      - script: echo "FAILED"
+
 ########################## API PIPELINE JOBS #########################
 ## manifest gen for API
 #  - name: api-man
