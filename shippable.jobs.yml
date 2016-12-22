@@ -1,10 +1,13 @@
 jobs:
+######################### NATIVE WAR CI/CD JOBS #########################
+# manifest that defines the Native WAR service definition
   - name: demo-war-manifest
     type: manifest
     steps:
       - IN: demo-war
       - IN: demo-war-trg
 
+# deploy job that deploys native war to cluster of VMs
   - name: demo-war-test-deploy
     type: deploy
     steps:
@@ -15,7 +18,9 @@ jobs:
         - script: sudo rm -rf /var/lib/tomcat7/webapps/*
         - script: sudo cp /tmp/shippable/demo-war-manifest/demo-war/sample.war /var/lib/tomcat7/webapps/sample.war
 
-######################### BUILD AMI #########################
+
+######################### INFRA AUTOMATION JOBS #########################
+# job to create AWS AMI used to deploy VMs
   - name: build-ami
     type: runSh
     steps:
@@ -30,7 +35,7 @@ jobs:
     on_failure:
       - script: cat /build/IN/bldami-repo/gitRepo/output.txt
 
-############################ DEPLOY AWS INFRA #########################
+# job to setup AWS IAM roles, profiles etc.
   - name: aws-infra-setup
     type: runSh
     steps:
@@ -47,6 +52,7 @@ jobs:
     on_failure:
       - script: /build/IN/setup-infra-repo/gitRepo/archiveState.sh
 
+# job to provision TEST VMs and ECS cluster
   - name: test-infra-prov
     type: runSh
     steps:
@@ -62,6 +68,7 @@ jobs:
     on_failure:
       - script: /build/IN/test-infra-repo/gitRepo/archiveState.sh
 
+# job to provision PROD VMs and ECS cluster
   - name: prod-infra-prov
     type: runSh
     steps:
@@ -79,7 +86,8 @@ jobs:
     on_failure:
       - script: /build/IN/prod-infra-repo/gitRepo/archiveState.sh
 
-######################### BUILD WAR DOCKER #########################
+###################### DOCKER Based WAR CI/CD JOBS #######################
+# package sample WAR into docker container
   - name: build-doc-war
     type: runSh
     steps:
@@ -94,8 +102,7 @@ jobs:
     on_failure:
       - script: echo "FAILED"
 
-########################## CI/CD DOCKER PIPELINE JOBS #########################
-# manifest gen for docker WAR
+#  manifest that defines the DOCKER WAR service definition
   - name: demo-doc-man
     type: manifest
     steps:
@@ -103,7 +110,7 @@ jobs:
       - IN: doc-img-opts
       - IN: test-infra-prov
 
-# TEST deployment for docker WAR
+# deploy job that deploys native war to TEST ECS Cluster
   - name: demo-doc-test
     type: deploy
     steps:
@@ -111,7 +118,7 @@ jobs:
       - IN: env-test-aws
       - TASK: managed
 
-# PROD deployment for API
+# deploy job that deploys native war to PROD ECS Cluster
   - name: demo-doc-prod
     type: deploy
     steps:
@@ -123,12 +130,13 @@ jobs:
       - IN: env-prod-aws
       - TASK: managed
 
-######################### SIT JOBS #########################
+######################### WAR SIT JOBS #########################
+## job to run SIT testing
 #  - name: sit
 #    type: runSh
 #    steps:
 #      - IN: sit-repo
-#      - IN: api-test
+#      - IN: demo-doc-test
 #      - IN: sit-params
 #      - TASK:
 #        - script: sudo apt-get install -y jq
