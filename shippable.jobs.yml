@@ -6,9 +6,9 @@ jobs:
     steps:
       - IN: demo-war
       - IN: demo-war-trg
-      - IN: demo-war-params
       - IN: demo-war-params1
-
+      - IN: demo-war-params
+      
 # deploy job that deploys native war to cluster of VMs
   - name: demo-war-test-deploy
     type: deploy
