@@ -7,7 +7,8 @@ jobs:
       - IN: demo-war
       - IN: demo-war-trg
       - IN: demo-war-params
-
+      - IN: demo-war-params1
+      
 # deploy job that deploys native war to cluster of VMs
   - name: demo-war-test-deploy
     type: deploy
@@ -17,6 +18,7 @@ jobs:
       - IN: demo-war-test-cls
       - TASK:
         - script: sudo rm -rf /var/lib/tomcat7/webapps/*
+        - script: .
         - script: sudo cp /tmp/shippable/demo-war-manifest/demo-war/sample.war /var/lib/tomcat7/webapps/sample.war
 
 ########################## INFRA AUTOMATION JOBS #########################

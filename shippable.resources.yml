@@ -21,6 +21,13 @@ resources:
       params:
         ENVIRONMENT: "FOO"
 
+# Parameters to Run WAR
+  - name: demo-war-params1
+    type: params
+    version:
+      params:
+        ENVIRONMENT: "BOO"
+
 # JFROG WAR reference
   - name: demo-war
     type: file
