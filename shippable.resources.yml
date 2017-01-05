@@ -33,7 +33,7 @@ resources:
     type: file
     integration: avinci-jf
     pointer:
-      sourceName: builds/sample.war
+      sourceName: builds/HelloWorld.war
     seed:
       versionName: initial
 

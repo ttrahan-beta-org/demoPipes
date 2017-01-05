@@ -16,8 +16,8 @@ jobs:
         force: true
       - IN: demo-war-test-cls
       - TASK:
-        - script: sudo rm -rf /var/lib/tomcat7/webapps/*
-        - script: sudo cp /tmp/shippable/demo-war-manifest/demo-war/sample.war /var/lib/tomcat7/webapps/sample.war
+        - script: sudo rm -rf /var/lib/tomcat7/webapps/HelloWorld.war
+        - script: sudo cp /tmp/shippable/demo-war-manifest/demo-war/HelloWorld.war /var/lib/tomcat7/webapps/HelloWorld.war
 
 ########################## INFRA AUTOMATION JOBS #########################
 ## job to create AWS AMI used to deploy VMs
