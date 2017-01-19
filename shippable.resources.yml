@@ -1,41 +1,41 @@
 resources:
 ###################### NATIVE WAR CI/CD RESOURCES #########################
-# jar trigger
-  - name: demo-war-trg
-    type: image
-    integration: avinci-dh
-    pointer:
-      sourceName: "sample.war"
-    seed:
-      versionName: "latest"
-
-# VM Cluster
-  - name: demo-war-test-cls
-    type: cluster
-    integration: demo-test-cls
-
-# Parameters to Run WAR
-  - name: demo-war-params
-    type: params
-    version:
-      params:
-        ENVIRONMENT: "FOO"
-
-# Parameters to Run WAR
-  - name: demo-war-params1
-    type: params
-    version:
-      params:
-        ENVIRONMENT: "BOO"
-
-# JFROG WAR reference
-  - name: demo-war
-    type: file
-    integration: avinci-jf
-    pointer:
-      sourceName: builds/HelloWorld.war
-    seed:
-      versionName: initial
+## jar trigger
+#  - name: demo-war-trg
+#    type: image
+#    integration: avinci-dh
+#    pointer:
+#      sourceName: "sample.war"
+#    seed:
+#      versionName: "latest"
+#
+## VM Cluster
+#  - name: demo-war-test-cls
+#    type: cluster
+#    integration: demo-test-cls
+#
+## Parameters to Run WAR
+#  - name: demo-war-params
+#    type: params
+#    version:
+#      params:
+#        ENVIRONMENT: "FOO"
+#
+## Parameters to Run WAR
+#  - name: demo-war-params1
+#    type: params
+#    version:
+#      params:
+#        ENVIRONMENT: "BOO"
+#
+## JFROG WAR reference
+#  - name: demo-war
+#    type: file
+#    integration: avinci-jf
+#    pointer:
+#      sourceName: builds/HelloWorld.war
+#    seed:
+#      versionName: initial
 
 ####################### INFRA AUTOMATION RESOURCES #########################
 ## AWS credentials

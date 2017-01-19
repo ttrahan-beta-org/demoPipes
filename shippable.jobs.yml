@@ -1,23 +1,23 @@
 jobs:
 ########################## NATIVE WAR CI/CD JOBS #########################
-# manifest that defines the Native WAR service definition
-  - name: demo-war-manifest
-    type: manifest
-    steps:
-      - IN: demo-war
-      - IN: demo-war-trg
-      - IN: demo-war-params1
-
-# deploy job that deploys native war to cluster of VMs
-  - name: demo-war-test-deploy
-    type: deploy
-    steps:
-      - IN: demo-war-manifest
-        force: true
-      - IN: demo-war-test-cls
-      - TASK:
-        - script: sudo rm -rf /opt/tomcat/webapps/HelloWorld.war
-        - script: sudo cp /tmp/shippable/demo-war-manifest/demo-war/HelloWorld.war /opt/tomcat/webapps/HelloWorld.war
+## manifest that defines the Native WAR service definition
+#  - name: demo-war-manifest
+#    type: manifest
+#    steps:
+#      - IN: demo-war
+#      - IN: demo-war-trg
+#      - IN: demo-war-params1
+#
+## deploy job that deploys native war to cluster of VMs
+#  - name: demo-war-test-deploy
+#    type: deploy
+#    steps:
+#      - IN: demo-war-manifest
+#        force: true
+#      - IN: demo-war-test-cls
+#      - TASK:
+#        - script: sudo rm -rf /opt/tomcat/webapps/HelloWorld.war
+#        - script: sudo cp /tmp/shippable/demo-war-manifest/demo-war/HelloWorld.war /opt/tomcat/webapps/HelloWorld.war
 
 ########################## INFRA AUTOMATION JOBS #########################
 ## job to create AWS AMI used to deploy VMs
