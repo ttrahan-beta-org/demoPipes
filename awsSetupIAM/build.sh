@@ -71,7 +71,7 @@ apply_changes() {
   terraform plan -var-file=/build/IN/$RES_AWS_CREDS/integration.env
   echo "apply changes"
   echo "-----------------------------------"
-  #terraform apply -var-file=/build/IN/$RES_AWS_CREDS/integration.env
+  terraform apply -var-file=/build/IN/$RES_AWS_CREDS/integration.env
 
   ls -al
   popd
