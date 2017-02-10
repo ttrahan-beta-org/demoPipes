@@ -46,11 +46,6 @@ resources:
     type: integration
     integration: avi-ecs
 
-# AWS pem key
-  - name: aws_pem
-    type: integration
-    integration: avi-demo-pem
-
 # Parameters to provision AMI Builder
   - name: bldami_params
     type: params
@@ -61,6 +56,11 @@ resources:
         SUBNET_ID: "subnet-1c0cda20"
         SECURITY_GROUP_ID: "sg-d1c671ac"
         REGION: "us-east-1"
+
+# AWS pem key
+  - name: aws_pem
+    type: integration
+    integration: avi-demo-pem
 
 ## Terraform code to setup AWS IAM
 #  - name: setup_infra_repo

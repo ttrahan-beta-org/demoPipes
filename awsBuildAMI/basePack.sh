@@ -64,7 +64,7 @@ install_packer() {
 }
 
 build_ami() {
-  pushd /build/IN/$REPO_RESOURCE_NAME/gitRepo
+  pushd /build/IN/$REPO_RESOURCE_NAME/gitRepo/awsBuildAMI
   echo "-----------------------------------"
 
   echo "validating AMI template"
