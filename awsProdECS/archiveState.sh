@@ -1,0 +1,28 @@
+#!/bin/bash -e
+
+export REPO_RESOURCE_NAME="prod-infra-repo"
+
+arch_statefile() {
+  local state_loc="/build/IN/$REPO_RESOURCE_NAME/gitRepo/terraform.tfstate"
+  if [ -f "$state_loc" ]; then
+    echo "new state file exists, copying"
+    echo "-----------------------------------"
+    cp -vr /build/IN/$REPO_RESOURCE_NAME/gitRepo/terraform.tfstate /build/state/
+  else
+    local previous_statefile_location="/build/previousState/terraform.tfstate"
+    if [ -f "$previous_statefile_location" ]; then
+      echo "previous state file exists, copying"
+      echo "-----------------------------------"
+      cp -vr previousState/terraform.tfstate /build/state/
+    else
+      echo "no previous state file exists. Skipping"
+      echo "-----------------------------------"
+    fi
+  fi
+}
+
+main() {
+  arch_statefile
+}
+
+main
