@@ -33,7 +33,7 @@ get_statefile() {
   if [ -f "$previous_statefile_location" ]; then
     echo "statefile exists, copying"
     echo "-----------------------------------"
-    cp -vr previousState/terraform.tfstate /build/IN/$REPO_RESOURCE_NAME/gitRepo
+    cp -vr previousState/terraform.tfstate /build/IN/$REPO_RESOURCE_NAME/gitRepo/awsSetupIAM
   else
     echo "no previous statefile exists"
     echo "-----------------------------------"
@@ -80,8 +80,8 @@ main() {
   install_terraform
   get_statefile
   create_pemfile
-  destroy_changes
-  #apply_changes
+  #destroy_changes
+  apply_changes
 }
 
 main

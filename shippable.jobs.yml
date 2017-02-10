@@ -51,25 +51,28 @@ jobs:
     on_success:
       - script: echo "SUCCESS"
     on_failure:
-      - script: echo "SUCCESS"
+      - script: echo "FAILURE"
     always:
       - script: /build/IN/auto_repo/gitRepo/awsSetupIAM/archiveState.sh
 
-## job to provision TEST VMs and ECS cluster
-#  - name: test-infra-prov
-#    type: runSh
-#    steps:
-#      - IN: aws-pem
-#      - IN: aws-creds
-#      - IN: test-infra-repo
-#      - IN: aws-infra-setup
-#      - TASK:
-#        - script: sudo apt-get install -y jq
-#        - script: IN/test-infra-repo/gitRepo/build.sh
-#    on_success:
-#      - script: /build/IN/test-infra-repo/gitRepo/archiveState.sh
-#    on_failure:
-#      - script: /build/IN/test-infra-repo/gitRepo/archiveState.sh
+# job to provision TEST VMs and ECS cluster
+  - name: test_infra_prov
+    type: runSh
+    steps:
+      - IN: aws_pem
+      - IN: aws_creds
+      - IN: auto_repo
+        switch: off
+      - IN: aws_infra_setup
+      - TASK:
+        - script: sudo apt-get install -y jq
+        - script: IN/auto_repo/gitRepo/awsTestECS/build.sh
+    on_success:
+      - script: echo "SUCCESS"
+    on_failure:
+      - script: echo "FAILURE"
+    always:
+      - script: /build/IN/auto_repo/gitRepo/awsTestECS/archiveState.sh
 #
 ## job to provision PROD VMs and ECS cluster
 #  - name: prod-infra-prov
