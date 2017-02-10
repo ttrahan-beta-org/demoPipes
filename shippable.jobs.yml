@@ -37,7 +37,7 @@ jobs:
       - script: cat /build/IN/auto_repo/gitRepo/awsBuildAMI/output.txt
 
 # job to setup AWS IAM roles, profiles etc.
-  - name: aws-infra-setup
+  - name: aws_infra_setup
     type: runSh
     steps:
       - IN: aws_pem
