@@ -20,21 +20,22 @@ jobs:
         - script: sudo cp /tmp/shippable/demo-war-manifest/demo-war/HelloWorld.war /opt/tomcat/webapps/HelloWorld.war
 
 ########################## INFRA AUTOMATION JOBS #########################
-## job to create AWS AMI used to deploy VMs
-#  - name: build-ami
-#    type: runSh
-#    steps:
-#      - IN: aws-creds
-#      - IN: bldami-repo
-#      - IN: bldami-params
-#      - TASK:
-#        - script: sudo apt-get install -y jq
-#        - script: IN/bldami-repo/gitRepo/basePack.sh bldami-params
-#    on_success:
-#      - script: echo "SUCCESS"
-#    on_failure:
-#      - script: cat /build/IN/bldami-repo/gitRepo/output.txt
-#
+# job to create AWS AMI used to deploy VMs
+  - name: build_ami
+    type: runSh
+    steps:
+      - IN: aws-creds
+      - IN: auto_repo
+        switch: off
+      - IN: bldami_params
+      - TASK:
+        - script: sudo apt-get install -y jq
+        - script: IN/auto_repo/gitRepo/awsBuildAMI/basePack.sh bldami_params
+    on_success:
+      - script: echo "SUCCESS"
+    on_failure:
+      - script: cat /build/IN/auto_repo/gitRepo/awsBuildAMI/output.txt
+
 ## job to setup AWS IAM roles, profiles etc.
 #  - name: aws-infra-setup
 #    type: runSh

@@ -3,8 +3,8 @@
 export PK_INSALL_LOCATION=/opt
 export PK_VERSION=0.11.0
 export PK_FILENAME=packer_"$PK_VERSION"_linux_amd64.zip
-export RES_AWS_CREDS="aws-creds"
-export REPO_RESOURCE_NAME="bldami-repo"
+export RES_AWS_CREDS="aws_creds"
+export REPO_RESOURCE_NAME="auto_repo"
 export RES_PARAMS=$1
 
 echo "RES_PARAMS=$RES_PARAMS"
@@ -73,28 +73,19 @@ build_ami() {
   echo "building AMI"
   echo "-----------------------------------"
 
-#  packer build -machine-readable -var 'aws_access_key='$aws_access_key_id \
-#    -var 'aws_secret_key='$aws_secret_access_key \
-#    -var 'REGION='$REGION \
-#    -var 'VPC_ID='$VPC_ID \
-#    -var 'SUBNET_ID='$SUBNET_ID \
-#    -var 'SECURITY_GROUP_ID='$SECURITY_GROUP_ID \
-#    -var 'SOURCE_AMI='$SOURCE_AMI \
-#    baseAMI.json > output.txt
+  packer build -machine-readable -var 'aws_access_key='$aws_access_key_id \
+    -var 'aws_secret_key='$aws_secret_access_key \
+    -var 'REGION='$REGION \
+    -var 'VPC_ID='$VPC_ID \
+    -var 'SUBNET_ID='$SUBNET_ID \
+    -var 'SECURITY_GROUP_ID='$SECURITY_GROUP_ID \
+    -var 'SOURCE_AMI='$SOURCE_AMI \
+    baseAMI.json 2>&1 | tee output.txt
 
-  packer build -var 'aws_access_key='$aws_access_key_id \
-  -var 'aws_secret_key='$aws_secret_access_key \
-  -var 'REGION='$REGION \
-  -var 'VPC_ID='$VPC_ID \
-  -var 'SUBNET_ID='$SUBNET_ID \
-  -var 'SECURITY_GROUP_ID='$SECURITY_GROUP_ID \
-  -var 'SOURCE_AMI='$SOURCE_AMI baseAMI.json
-
-#    cat output.txt
-#    #this is to get the ami from output
-#    echo AMI_ID=$(cat output.txt | awk -F, '$0 ~/artifact,0,id/ {print $6}' \
-#    | cut -d':' -f 2) > /build/state/AMI_ID.txt
-#    cat /build/state/AMI_ID.txt
+    #this is to get the ami from output
+    echo AMI_ID=$(cat output.txt | awk -F, '$0 ~/artifact,0,id/ {print $6}' \
+    | cut -d':' -f 2) > /build/state/AMI_ID.txt
+    cat /build/state/AMI_ID.txt
   popd
 }
 
