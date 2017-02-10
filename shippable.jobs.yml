@@ -73,24 +73,27 @@ jobs:
       - script: echo "FAILURE"
     always:
       - script: /build/IN/auto_repo/gitRepo/awsTestECS/archiveState.sh
-#
-## job to provision PROD VMs and ECS cluster
-#  - name: prod-infra-prov
-#    type: runSh
-#    steps:
-#      - IN: aws-pem
-#      - IN: aws-creds
-#      - IN: prod-infra-repo
-#      - IN: aws-infra-setup
-#      - IN: build-ami
-#        switch: off
-#      - TASK:
-#        - script: sudo apt-get install -y jq
-#        - script: IN/prod-infra-repo/gitRepo/build.sh
-#    on_success:
-#      - script: /build/IN/prod-infra-repo/gitRepo/archiveState.sh
-#    on_failure:
-#      - script: /build/IN/prod-infra-repo/gitRepo/archiveState.sh
+
+# job to provision PROD VMs and ECS cluster
+  - name: prod_infra_prov
+    type: runSh
+    steps:
+      - IN: aws_pem
+      - IN: aws_creds
+      - IN: auto_repo
+        switch: off
+      - IN: aws_infra_setup
+      - IN: build_ami
+        switch: off
+      - TASK:
+        - script: sudo apt-get install -y jq
+        - script: IN/auto_repo/gitRepo/awsProdECS/build.sh
+    on_success:
+      - script: echo "SUCCESS"
+    on_failure:
+      - script: echo "FAILURE"
+    always:
+      - script: /build/IN/auto_repo/gitRepo/awsProdECS/archiveState.sh
 
 ###################### DOCKER Based WAR CI/CD JOBS #######################
 ## package sample WAR into docker container

@@ -2,9 +2,9 @@
 
 export TF_INSALL_LOCATION=/opt
 export TF_VERSION=0.7.7
-export REPO_RESOURCE_NAME="prod-infra-repo"
-export RES_AWS_CREDS="aws-creds"
-export RES_AWS_PEM="aws-pem"
+export REPO_RESOURCE_NAME="auto_demo"
+export RES_AWS_CREDS="aws_creds"
+export RES_AWS_PEM="aws_pem"
 
 install_terraform() {
   pushd $TF_INSALL_LOCATION
@@ -33,7 +33,7 @@ get_statefile() {
   if [ -f "$previous_statefile_location" ]; then
     echo "statefile exists, copying"
     echo "-----------------------------------"
-    cp -vr previousState/terraform.tfstate /build/IN/$REPO_RESOURCE_NAME/gitRepo
+    cp -vr previousState/terraform.tfstate /build/IN/$REPO_RESOURCE_NAME/gitRepo/awsProdECS
   else
     echo "no previous statefile exists"
     echo "-----------------------------------"
@@ -50,7 +50,7 @@ create_pemfile() {
 }
 
 destroy_changes() {
-  pushd /build/IN/$REPO_RESOURCE_NAME/gitRepo
+  pushd /build/IN/$REPO_RESOURCE_NAME/gitRepo/awsProdECS
   echo "-----------------------------------"
 
   echo "destroy changes"
@@ -60,10 +60,9 @@ destroy_changes() {
 }
 
 apply_changes() {
-  pushd /build/IN/$REPO_RESOURCE_NAME/gitRepo
+  pushd /build/IN/$REPO_RESOURCE_NAME/gitRepo/awsProdECS
   echo "-----------------------------------"
   ps -eaf | grep ssh
-  ls -al ~/.ssh/
   which ssh-agent
 
   echo "planning changes"

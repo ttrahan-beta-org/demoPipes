@@ -1,9 +1,9 @@
 #!/bin/bash -e
 
-export REPO_RESOURCE_NAME="prod-infra-repo"
+export REPO_RESOURCE_NAME="auto_demo"
 
 arch_statefile() {
-  local state_loc="/build/IN/$REPO_RESOURCE_NAME/gitRepo/terraform.tfstate"
+  local state_loc="/build/IN/$REPO_RESOURCE_NAME/gitRepo/awsProdECS/terraform.tfstate"
   if [ -f "$state_loc" ]; then
     echo "new state file exists, copying"
     echo "-----------------------------------"
