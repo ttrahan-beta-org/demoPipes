@@ -63,7 +63,6 @@ apply_changes() {
   pushd /build/IN/$REPO_RESOURCE_NAME/gitRepo/awsSetupIAM
   echo "-----------------------------------"
   ps -eaf | grep ssh
-  ls -al ~/.ssh/
   which ssh-agent
 
   echo "planning changes"
@@ -73,7 +72,6 @@ apply_changes() {
   echo "-----------------------------------"
   terraform apply -var-file=/build/IN/$RES_AWS_CREDS/integration.env
 
-  ls -al
   popd
 }
 
@@ -82,8 +80,8 @@ main() {
   install_terraform
   get_statefile
   create_pemfile
-  #destroy_changes
-  apply_changes
+  destroy_changes
+  #apply_changes
 }
 
 main
