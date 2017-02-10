@@ -117,7 +117,7 @@ jobs:
     steps:
       - IN: demo-doc-img
       - IN: doc-img-opts
-      - IN: test-infra-prov
+      - IN: test_infra_prov
 
 # deploy job that deploys native war to TEST ECS Cluster
   - name: demo-doc-test
@@ -131,7 +131,7 @@ jobs:
   - name: demo-doc-prod
     type: deploy
     steps:
-      - IN: prod-infra-prov
+      - IN: prod_infra_prov
         switch: off
       - IN: doc-p-scaler
       - IN: demo-doc-test
