@@ -2,9 +2,9 @@
 
 export TF_INSALL_LOCATION=/opt
 export TF_VERSION=0.7.7
-export REPO_RESOURCE_NAME="setup-infra-repo"
-export RES_AWS_CREDS="aws-creds"
-export RES_AWS_PEM="aws-pem"
+export REPO_RESOURCE_NAME="auto_repo"
+export RES_AWS_CREDS="aws_creds"
+export RES_AWS_PEM="aws_pem"
 
 install_terraform() {
   pushd $TF_INSALL_LOCATION
@@ -50,7 +50,7 @@ create_pemfile() {
 }
 
 destroy_changes() {
-  pushd /build/IN/$REPO_RESOURCE_NAME/gitRepo
+  pushd /build/IN/$REPO_RESOURCE_NAME/gitRepo/awsSetupIAM
   echo "-----------------------------------"
 
   echo "destroy changes"
@@ -60,7 +60,7 @@ destroy_changes() {
 }
 
 apply_changes() {
-  pushd /build/IN/$REPO_RESOURCE_NAME/gitRepo
+  pushd /build/IN/$REPO_RESOURCE_NAME/gitRepo/awsSetupIAM
   echo "-----------------------------------"
   ps -eaf | grep ssh
   ls -al ~/.ssh/
@@ -71,7 +71,7 @@ apply_changes() {
   terraform plan -var-file=/build/IN/$RES_AWS_CREDS/integration.env
   echo "apply changes"
   echo "-----------------------------------"
-  terraform apply -var-file=/build/IN/$RES_AWS_CREDS/integration.env
+  #terraform apply -var-file=/build/IN/$RES_AWS_CREDS/integration.env
   popd
 }
 

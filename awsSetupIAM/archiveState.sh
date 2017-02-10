@@ -1,13 +1,13 @@
 #!/bin/bash -e
 
-export REPO_RESOURCE_NAME="setup-infra-repo"
+export REPO_RESOURCE_NAME="auto_repo"
 
 arch_statefile() {
-  local state_loc="/build/IN/$REPO_RESOURCE_NAME/gitRepo/terraform.tfstate"
+  local state_loc="/build/IN/$REPO_RESOURCE_NAME/gitRepo/awsSetupIAM/terraform.tfstate"
   if [ -f "$state_loc" ]; then
     echo "new state file exists, copying"
     echo "-----------------------------------"
-    cp -vr /build/IN/$REPO_RESOURCE_NAME/gitRepo/terraform.tfstate /build/state/
+    cp -vr /build/IN/$REPO_RESOURCE_NAME/gitRepo/awsSetupIAM/terraform.tfstate /build/state/
   else
     local previous_statefile_location="/build/previousState/terraform.tfstate"
     if [ -f "$previous_statefile_location" ]; then

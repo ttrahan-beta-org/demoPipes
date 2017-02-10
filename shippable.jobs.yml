@@ -36,23 +36,25 @@ jobs:
     on_failure:
       - script: cat /build/IN/auto_repo/gitRepo/awsBuildAMI/output.txt
 
-## job to setup AWS IAM roles, profiles etc.
-#  - name: aws-infra-setup
-#    type: runSh
-#    steps:
-#      - IN: aws-pem
-#      - IN: aws-creds
-#      - IN: setup-infra-repo
-#      - IN: build-ami
-#        switch: off
-#      - TASK:
-#        - script: sudo apt-get install -y jq
-#        - script: IN/setup-infra-repo/gitRepo/build.sh
-#    on_success:
-#      - script: /build/IN/setup-infra-repo/gitRepo/archiveState.sh
-#    on_failure:
-#      - script: /build/IN/setup-infra-repo/gitRepo/archiveState.sh
-#
+# job to setup AWS IAM roles, profiles etc.
+  - name: aws-infra-setup
+    type: runSh
+    steps:
+      - IN: aws_pem
+      - IN: aws_creds
+      - IN: auto_repo
+        switch: off
+      - IN: build_ami
+      - TASK:
+        - script: sudo apt-get install -y jq
+        - script: IN/auto_repo/gitRepo/awsSetupIAM/build.sh
+    on_success:
+      - script: echo "SUCCESS"
+    on_failure:
+      - script: echo "SUCCESS"
+    always:
+      - script: /build/IN/auto_repo/gitRepo/awsSetupIAM/archiveState.sh
+
 ## job to provision TEST VMs and ECS cluster
 #  - name: test-infra-prov
 #    type: runSh

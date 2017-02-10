@@ -62,30 +62,6 @@ resources:
     type: integration
     integration: avi-demo-pem
 
-## Terraform code to setup AWS IAM
-#  - name: setup_infra_repo
-#    type: gitRepo
-#    integration: "avinci-gh"
-#    pointer:
-#      sourceName: "avinci/demoSetupAWS"
-#      branch: master
-#
-## Terraform code to setup AWS Test VMs and Container Services
-#  - name: test-infra-repo
-#    type: gitRepo
-#    integration: "avinci-gh"
-#    pointer:
-#      sourceName: "avinci/demoTestInfra"
-#      branch: master
-#
-## Terraform code to setup AWS Prod VMs and Container Services
-#  - name: prod-infra-repo
-#    type: gitRepo
-#    integration: "avinci-gh"
-#    pointer:
-#      sourceName: "avinci/demoProdInfra"
-#      branch: master
-
 ###################### DOCKER Based WAR CI/CD RESOURCES #######################
 ## Docker credentials
 #  - name: docker-creds
