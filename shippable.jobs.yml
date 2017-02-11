@@ -63,7 +63,6 @@ jobs:
       - IN: auto_repo
         switch: off
       - IN: build_ami
-      - IN: aws_infra_setup
       - TASK:
         - script: sudo apt-get install -y jq
         - script: IN/auto_repo/gitRepo/provisionAWS.sh awsTestECS
@@ -82,7 +81,6 @@ jobs:
       - IN: aws_creds
       - IN: auto_repo
         switch: off
-      - IN: aws_infra_setup
       - IN: build_ami
         switch: off
       - TASK:
