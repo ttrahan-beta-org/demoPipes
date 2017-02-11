@@ -144,12 +144,12 @@ jobs:
 #  - name: sit
 #    type: runSh
 #    steps:
-#      - IN: sit-repo
-#      - IN: demo-doc-test
-#      - IN: sit-params
+#      - IN: sit_repo
+#      - IN: demo_doc_test
+#      - IN: sit_params
 #      - TASK:
 #        - script: sudo apt-get install -y jq
-#        - script: IN/sit-repo/gitRepo/test.sh sit-params
+#        - script: IN/sit_repo/gitRepo/test.sh sit_params
 #    on_success:
 #      - script: touch /build/state/success.txt
 #    on_failure:

@@ -118,7 +118,7 @@ resources:
 
 ############################## WAR SIT RESOURCES #########################
 ## REPO of SIT code
-#  - name: sit-repo
+#  - name: sit_repo
 #    type: gitRepo
 #    integration: "avinci-gh"
 #    pointer:
@@ -126,9 +126,9 @@ resources:
 #      branch: master
 #
 ## SIT env vars for BOX
-#  - name: sit-params
+#  - name: sit_params
 #    type: params
 #    version:
 #      params:
-#        API_URL: "54.227.103.6:8080"
+#        API_URL: "54.158.18.50:8080"
 #        API_TOKEN: "NA"
