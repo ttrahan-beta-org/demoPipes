@@ -24,8 +24,8 @@ jobs:
     type: runSh
     steps:
       - IN: aws_pem
-      - IN: build_ami
-        switch: off
+#      - IN: build_ami
+#        switch: off
       - IN: aws_creds
       - IN: auto_repo
         switch: off
