@@ -103,7 +103,6 @@ jobs:
       - IN: docker_creds
       - IN: demo_doc_repo
       - TASK:
-        - script: sudo apt-get install -y jq
         - script: IN/demo_doc_repo/gitRepo/build.sh
       - OUT: demo_doc_img
     on_success:

@@ -81,7 +81,7 @@ resources:
     type: image
     integration: avinci-dh
     pointer:
-      sourceName: "avinci/sample"
+      sourceName: "avinci/samplejavatomcat"
     seed:
       versionName: "latest"
 
