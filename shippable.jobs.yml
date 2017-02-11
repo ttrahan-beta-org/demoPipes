@@ -24,6 +24,8 @@ jobs:
     type: runSh
     steps:
       - IN: aws_pem
+      - IN: build_ami
+        switch: off
       - IN: aws_creds
       - IN: auto_repo
         switch: off
@@ -42,7 +44,6 @@ jobs:
     type: runSh
     steps:
       - IN: aws_creds
-      - IN: aws_infra_setup
       - IN: auto_repo
         switch: off
       - IN: bldami_params
@@ -63,6 +64,8 @@ jobs:
       - IN: auto_repo
         switch: off
       - IN: build_ami
+        switch: off
+      - IN: aws_infra_setup
       - TASK:
         - script: sudo apt-get install -y jq
         - script: IN/auto_repo/gitRepo/provisionAWS.sh awsTestECS
