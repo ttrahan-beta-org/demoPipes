@@ -47,13 +47,13 @@ jobs:
       - IN: build_ami
       - TASK:
         - script: sudo apt-get install -y jq
-        - script: IN/auto_repo/gitRepo/awsSetupIAM/build.sh
+        - script: IN/auto_repo/gitRepo/provisionAWS.sh awsSetupIAM
     on_success:
       - script: echo "SUCCESS"
     on_failure:
       - script: echo "FAILURE"
     always:
-      - script: /build/IN/auto_repo/gitRepo/awsSetupIAM/archiveState.sh
+      - script: /build/IN/auto_repo/gitRepo/archiveProvisionState.sh awsSetupIAM
 
 # job to provision TEST VMs and ECS cluster
   - name: test_infra_prov
@@ -66,13 +66,13 @@ jobs:
       - IN: aws_infra_setup
       - TASK:
         - script: sudo apt-get install -y jq
-        - script: IN/auto_repo/gitRepo/awsTestECS/build.sh
+        - script: IN/auto_repo/gitRepo/provisionAWS.sh awsTestECS
     on_success:
       - script: echo "SUCCESS"
     on_failure:
       - script: echo "FAILURE"
     always:
-      - script: /build/IN/auto_repo/gitRepo/awsTestECS/archiveState.sh
+      - script: /build/IN/auto_repo/gitRepo/archiveProvisionState.sh awsTestECS
 
 # job to provision PROD VMs and ECS cluster
   - name: prod_infra_prov
