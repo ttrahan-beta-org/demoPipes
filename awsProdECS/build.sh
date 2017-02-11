@@ -22,6 +22,31 @@ export AWS_CREDS_RES_META=$(eval echo "$"$AWS_CREDS_RES_UP"_META") #loc of integ
 export AWS_PEM_RES_UP=$(echo $AWS_PEM_RES | awk '{print toupper($0)}')
 export AWS_PEM_RES_META=$(eval echo "$"$AWS_PEM_RES_UP"_META") #loc of integration.json
 
+
+test_env_info() {
+  echo "Testing all environment variables that are critical"
+
+  echo "########### CURR_JOB: $CURR_JOB"
+  echo "########### CURR_JOB_CONTEXT: $CURR_JOB_CONTEXT"
+  echo "########### CURR_JOB_UP: $CURR_JOB_UP"
+  echo "########### PREV_TF_STATEFILE: $PREV_TF_STATEFILE"
+
+  echo "########### REPO_RES: $REPO_RES"
+  echo "########### REPO_RES_UP: $REPO_RES_UP"
+  echo "########### REPO_RES_STATE: $REPO_RES_STATE"
+  echo "########### REPO_RES_CONTEXT: $REPO_RES_CONTEXT"
+
+  echo "########### AWS_CREDS_RES: $AWS_CREDS_RES"
+  echo "########### AWS_CREDS_RES_UP: $AWS_CREDS_RES_UP"
+  echo "########### AWS_CREDS_RES_META: $AWS_CREDS_RES_META"
+
+  echo "########### AWS_PEM_RES: $AWS_PEM_RES"
+  echo "########### AWS_PEM_RES_UP: $AWS_PEM_RES_UP"
+  echo "########### AWS_PEM_RES_META: $AWS_PEM_RES_META"
+
+  echo "successfully loaded node information"
+}
+
 install_terraform() {
   pushd $TF_INSALL_LOCATION
   echo "Fetching terraform"
@@ -43,7 +68,7 @@ install_terraform() {
 }
 
 get_statefile() {
-  echo "Copying previous state file"
+  echo "Managing state file"
   echo "-----------------------------------"
   if [ -f "$PREV_TF_STATEFILE" ]; then
     echo "Statefile exists, copying"
