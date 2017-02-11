@@ -3,123 +3,123 @@ resources:
 # JFROG WAR reference
   - name: demo_war
     type: file
-    integration: demo-jf
+    integration: "demo-jf"
     pointer:
-      sourceName: builds/HelloWorld.war
+      sourceName: "builds/HelloWorld.war"
     seed:
       versionName: initial
 
-## VM Cluster
-#  - name: demo_war_test_cls
-#    type: cluster
-#    integration: demo-test-cls
-#
-## Parameters to Run WAR
-#  - name: demo_war_params
-#    type: params
-#    version:
-#      params:
-#        ENVIRONMENT: "FOO"
-#
+# VM Cluster
+  - name: demo_war_test_cls
+    type: cluster
+    integration: "demo-vm-cls"
+
+# Parameters to Run WAR
+  - name: demo_war_params
+    type: params
+    version:
+      params:
+        ENVIRONMENT: "FOO"
+
 ######################## AUTOMATION AS CODE REPO #########################
-## REPO for all automation
-#  - name: auto_repo
-#    type: gitRepo
-#    integration: "avinci-gh"
-#    pointer:
-#      sourceName: "avinci/demoPipes"
-#      branch: master
-#
-#
+# REPO for all automation
+  - name: auto_repo
+    type: gitRepo
+    integration: "demo-gh"
+    pointer:
+      sourceName: "avinci/demoPipes"
+      branch: master
+
+
 ######################## INFRA AUTOMATION RESOURCES #########################
-## AWS credentials
-#  - name: aws_creds
-#    type: integration
-#    integration: avi-ecs
-#
-## Parameters to provision AMI Builder
-#  - name: bldami_params
-#    type: params
-#    version:
-#      params:
-#        SOURCE_AMI: "ami-c8580bdf" #ecs optimized AMI
-#        VPC_ID: "vpc-1032db76"
-#        SUBNET_ID: "subnet-1c0cda20"
-#        SECURITY_GROUP_ID: "sg-d1c671ac"
-#        REGION: "us-east-1"
-#
-## AWS pem key
-#  - name: aws_pem
-#    type: integration
-#    integration: avi-demo-pem
-#
+# AWS credentials
+  - name: aws_creds
+    type: integration
+    integration: "demo-aws-key"
+
+# Parameters to provision AMI Builder
+  - name: bldami_params
+    type: params
+    version:
+      params:
+        SOURCE_AMI: "ami-c8580bdf" #ecs optimized AMI
+        VPC_ID: "vpc-1032db76"
+        SUBNET_ID: "subnet-1c0cda20"
+        SECURITY_GROUP_ID: "sg-d1c671ac"
+        REGION: "us-east-1"
+
+# AWS pem key
+  - name: aws_pem
+    type: integration
+    integration: "demo-aws-pem"
+
 ####################### DOCKER Based WAR CI/CD RESOURCES #######################
-## Docker credentials
-#  - name: docker_creds
-#    type: integration
-#    integration: avinci-dh
-#
-## Source code for sample WAR app
-#  - name: demo_doc_repo
-#    type: gitRepo
-#    integration: "avinci-gh"
-#    pointer:
-#      sourceName: "avinci/samplejavatomcat"
-#      branch: docker
-#
-## Docker Image packaging sample WAR
-#  - name: demo_doc_img
-#    type: image
-#    integration: avinci-dh
-#    pointer:
-#      sourceName: "avinci/samplejavatomcat"
-#    seed:
-#      versionName: "latest"
-#
-## Docker Options for packaged WAR
-#  - name: doc_img_opts
-#    type: dockerOptions
-#    version:
-#      memory: 256
-#      cpuShares: 256
-#      portMappings:
-#        - 8080:8080
-#
-## Reference to ECS Test Cluster
-#  - name: env_test_aws
-#    type: cluster
-#    integration: avi-ecs
-#    pointer:
-#      sourceName : "test-aws"
-#      region: "us-east-1"
-#
-## Reference to ECS PROD Cluster
-#  - name: env_prod_aws
-#    type: cluster
-#    integration: avi-ecs
-#    pointer:
-#      sourceName : "prod-aws"
-#      region: "us-east-1"
-#
-## Number of packaged WARs to deploy to Prod
-#  - name: doc_p_scaler
-#    type: replicas
-#    version:
-#      count: 2
+# Docker credentials
+  - name: docker_creds
+    type: integration
+    integration: "demo-dh"
+
+# Source code for sample WAR app
+  - name: demo_doc_repo
+    type: gitRepo
+    integration: "demo-gh"
+    pointer:
+      sourceName: "avinci/samplejavatomcat"
+      branch: docker
+
+# Docker Image packaging sample WAR
+  - name: demo_doc_img
+    type: image
+    integration: "demo-dh"
+    pointer:
+      sourceName: "avinci/samplejavatomcat"
+    seed:
+      versionName: "latest"
+
+# Docker Options for packaged WAR
+  - name: doc_img_opts
+    type: dockerOptions
+    version:
+      memory: 256
+      cpuShares: 256
+      portMappings:
+        - 8080:8080
+
+# Reference to ECS Test Cluster
+  - name: env_test_aws
+    type: cluster
+    integration: "demo-aws-key"
+    pointer:
+      sourceName : "test-aws"
+      region: "us-east-1"
+
+# Reference to ECS PROD Cluster
+  - name: env_prod_aws
+    type: cluster
+    integration: "demo-aws-key"
+    pointer:
+      sourceName : "prod-aws"
+      region: "us-east-1"
+
+# Number of packaged WARs to deploy to Prod
+  - name: doc_p_scaler
+    type: replicas
+    version:
+      count: 2
 
 ############################## WAR SIT RESOURCES #########################
-## REPO of SIT code
-#  - name: sit_repo
-#    type: gitRepo
-#    integration: "avinci-gh"
-#    pointer:
-#      sourceName: avinci/demoSIT
-#      branch: master
-#
-## SIT env vars for BOX
-#  - name: sit_params
-#    type: params
-#    version:
-#      params:
-#        API_URL: "54.158.18.50:8080"
-#        API_TOKEN: "NA"
+# REPO of SIT code
+  - name: sit_repo
+    type: gitRepo
+    integration: "demo-gh"
+    pointer:
+      sourceName: "avinci/demoSIT"
+      branch: master
+
+# SIT env vars for BOX
+  - name: sit_params
+    type: params
+    version:
+      params:
+        API_URL: "54.158.18.50:8080"
+        API_TOKEN: "NA"
