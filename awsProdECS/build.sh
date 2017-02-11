@@ -2,9 +2,25 @@
 
 export TF_INSALL_LOCATION=/opt
 export TF_VERSION=0.7.7
-export REPO_RESOURCE_NAME="auto_demo"
-export RES_AWS_CREDS="aws_creds"
-export RES_AWS_PEM="aws_pem"
+
+export CURR_JOB="prod_infra_prov"
+export CURR_JOB_CONTEXT="awsProdECS"
+export REPO_RES="auto_demo"
+export AWS_CREDS_RES="aws_creds"
+export AWS_PEM_RES="aws_pem"
+
+export CURR_JOB_UP=$(echo $CURR_JOB | awk '{print toupper($0)}')
+export PREV_TF_STATEFILE="$JOB_PREVIOUS_STATE/terraform.tfstate"
+
+export REPO_RES_UP=$(echo $REPO_RES | awk '{print toupper($0)}')
+export REPO_RES_STATE=$(eval echo "$"$REPO_RES_UP"_STATE") #loc of git repo clone
+export REPO_RES_CONTEXT="$REPO_RES_STATE/$CURR_JOB_CONTEXT"
+
+export AWS_CREDS_RES_UP=$(echo $AWS_CREDS_RES | awk '{print toupper($0)}')
+export AWS_CREDS_RES_META=$(eval echo "$"$AWS_CREDS_RES_UP"_META") #loc of integration.json
+
+export AWS_PEM_RES_UP=$(echo $AWS_PEM_RES | awk '{print toupper($0)}')
+export AWS_PEM_RES_META=$(eval echo "$"$AWS_PEM_RES_UP"_META") #loc of integration.json
 
 install_terraform() {
   pushd $TF_INSALL_LOCATION
@@ -29,13 +45,12 @@ install_terraform() {
 get_statefile() {
   echo "Copying previous state file"
   echo "-----------------------------------"
-  local previous_statefile_location="/build/previousState/terraform.tfstate"
-  if [ -f "$previous_statefile_location" ]; then
-    echo "statefile exists, copying"
+  if [ -f "$PREV_TF_STATEFILE" ]; then
+    echo "Statefile exists, copying"
     echo "-----------------------------------"
-    cp -vr previousState/terraform.tfstate /build/IN/$REPO_RESOURCE_NAME/gitRepo/awsProdECS
+    cp -vr $PREV_TF_STATEFILE "$REPO_RES_STATE/$CURR_JOB_CONTEXT"
   else
-    echo "no previous statefile exists"
+    echo "No previous statefile exists"
     echo "-----------------------------------"
   fi
 }
@@ -43,34 +58,38 @@ get_statefile() {
 create_pemfile() {
  echo "Extracting AWS PEM"
  echo "-----------------------------------"
- cat ./IN/$RES_AWS_PEM/integration.json  | jq -r '.key' > ./IN/$REPO_RESOURCE_NAME/gitRepo/demo-key.pem
- chmod 600 ./IN/$REPO_RESOURCE_NAME/gitRepo/demo-key.pem
+ cat "$AWS_PEM_RES_META/integration.json"  | jq -r '.key' > "$REPO_RES_CONTEXT/demo-key.pem"
+ chmod 600 "$REPO_RES_CONTEXT/demo-key.pem"
  echo "Completed Extracting AWS PEM"
  echo "-----------------------------------"
 }
 
 destroy_changes() {
-  pushd /build/IN/$REPO_RESOURCE_NAME/gitRepo/awsProdECS
+  pushd $$REPO_RES_CONTEXT
   echo "-----------------------------------"
 
-  echo "destroy changes"
+  echo "Destroy changes"
   echo "-----------------------------------"
-  terraform destroy -force -var-file=/build/IN/$RES_AWS_CREDS/integration.env
+  terraform destroy -force -var-file="$AWS_CREDS_RES_META/integration.env"
   popd
 }
 
 apply_changes() {
-  pushd /build/IN/$REPO_RESOURCE_NAME/gitRepo/awsProdECS
+  pushd /build/IN/$REPO_RES/gitRepo/awsProdECS
+
+  echo "Testing SSH"
   echo "-----------------------------------"
   ps -eaf | grep ssh
   which ssh-agent
 
-  echo "planning changes"
+  echo "Planning changes"
   echo "-----------------------------------"
-  terraform plan -var-file=/build/IN/$RES_AWS_CREDS/integration.env
-  echo "apply changes"
+  terraform plan -var-file="$AWS_CREDS_RES_META/integration.env"
+
+  echo "Apply changes"
   echo "-----------------------------------"
-  terraform apply -var-file=/build/IN/$RES_AWS_CREDS/integration.env
+  terraform apply -var-file="$AWS_CREDS_RES_META/integration.env"
+
   popd
 }
 
