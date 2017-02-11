@@ -5,7 +5,7 @@ export TF_VERSION=0.7.7
 
 export CURR_JOB="prod_infra_prov"
 export CURR_JOB_CONTEXT="awsProdECS"
-export REPO_RES="auto_demo"
+export REPO_RES="auto_repo"
 export AWS_CREDS_RES="aws_creds"
 export AWS_PEM_RES="aws_pem"
 
@@ -21,7 +21,6 @@ export AWS_CREDS_RES_META=$(eval echo "$"$AWS_CREDS_RES_UP"_META") #loc of integ
 
 export AWS_PEM_RES_UP=$(echo $AWS_PEM_RES | awk '{print toupper($0)}')
 export AWS_PEM_RES_META=$(eval echo "$"$AWS_PEM_RES_UP"_META") #loc of integration.json
-
 
 test_env_info() {
   echo "Testing all environment variables that are critical"
