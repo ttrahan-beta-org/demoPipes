@@ -19,11 +19,30 @@ jobs:
         - script: sudo cp /tmp/shippable/demo_war_manifest/demo_war/HelloWorld.war /opt/tomcat/webapps/HelloWorld.war
 
 ########################## INFRA AUTOMATION JOBS #########################
+# job to setup AWS IAM roles, profiles etc.
+  - name: aws_infra_setup
+    type: runSh
+    steps:
+      - IN: aws_pem
+      - IN: aws_creds
+      - IN: auto_repo
+        switch: off
+      - TASK:
+        - script: sudo apt-get install -y jq
+        - script: IN/auto_repo/gitRepo/provisionAWS.sh awsSetupIAM
+    on_success:
+      - script: echo "SUCCESS"
+    on_failure:
+      - script: echo "FAILURE"
+    always:
+      - script: /build/IN/auto_repo/gitRepo/archiveProvisionState.sh awsSetupIAM
+
 # job to create AWS AMI used to deploy VMs
   - name: build_ami
     type: runSh
     steps:
       - IN: aws_creds
+      - IN: aws_infra_setup
       - IN: auto_repo
         switch: off
       - IN: bldami_params
@@ -35,25 +54,6 @@ jobs:
     on_failure:
       - script: cat /build/IN/auto_repo/gitRepo/awsBuildAMI/output.txt
 
-# job to setup AWS IAM roles, profiles etc.
-  - name: aws_infra_setup
-    type: runSh
-    steps:
-      - IN: aws_pem
-      - IN: aws_creds
-      - IN: auto_repo
-        switch: off
-      - IN: build_ami
-      - TASK:
-        - script: sudo apt-get install -y jq
-        - script: IN/auto_repo/gitRepo/provisionAWS.sh awsSetupIAM
-    on_success:
-      - script: echo "SUCCESS"
-    on_failure:
-      - script: echo "FAILURE"
-    always:
-      - script: /build/IN/auto_repo/gitRepo/archiveProvisionState.sh awsSetupIAM
-
 # job to provision TEST VMs and ECS cluster
   - name: test_infra_prov
     type: runSh
@@ -62,6 +62,7 @@ jobs:
       - IN: aws_creds
       - IN: auto_repo
         switch: off
+      - IN: build_ami
       - IN: aws_infra_setup
       - TASK:
         - script: sudo apt-get install -y jq
