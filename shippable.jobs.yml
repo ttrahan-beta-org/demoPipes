@@ -82,6 +82,7 @@ jobs:
     steps:
       - IN: aws_pem
       - IN: aws_creds
+      - IN: aws_infra_setup
       - IN: auto_repo
         switch: off
       - IN: build_ami
