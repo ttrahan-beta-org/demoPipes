@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 export TF_INSALL_LOCATION=/opt
-export TF_VERSION=0.7.7
+export TF_VERSION=0.8.6
 
 export CURR_JOB="prod_infra_prov"
 export CURR_JOB_CONTEXT="awsProdECS"
@@ -120,7 +120,7 @@ apply_changes() {
 main() {
   eval `ssh-agent -s`
   test_env_info
-  #install_terraform
+  install_terraform
   get_statefile
   create_pemfile
   destroy_changes
