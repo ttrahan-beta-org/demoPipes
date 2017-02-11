@@ -12,7 +12,7 @@ resources:
 # VM Cluster
   - name: demo_war_test_cls
     type: cluster
-    integration: "demo-vm-cls"
+    integration: "demo-vm-cluster"
 
 # Parameters to Run WAR
   - name: demo_war_params
