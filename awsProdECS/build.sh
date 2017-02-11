@@ -120,7 +120,7 @@ apply_changes() {
 main() {
   eval `ssh-agent -s`
   test_env_info
-  install_terraform
+  #install_terraform
   get_statefile
   create_pemfile
   destroy_changes
