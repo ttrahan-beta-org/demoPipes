@@ -42,7 +42,7 @@ jobs:
     type: runSh
     steps:
       - IN: aws_creds
-#      - IN: aws_infra_setup
+      - IN: aws_infra_setup
       - IN: auto_repo
         switch: off
       - IN: bldami_params
