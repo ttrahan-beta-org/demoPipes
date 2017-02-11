@@ -5,7 +5,6 @@ jobs:
 #    type: manifest
 #    steps:
 #      - IN: demo_war
-#      - IN: demo-war-trg
 #      - IN: demo_war_params
 #
 ## deploy job that deploys native war to cluster of VMs
