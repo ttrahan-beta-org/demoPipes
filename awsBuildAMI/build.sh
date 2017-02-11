@@ -3,13 +3,12 @@
 export TF_INSALL_LOCATION=/opt
 export TF_VERSION=0.8.6
 
-export CURR_JOB="prod_infra_prov"
-export CURR_JOB_CONTEXT="awsProdECS"
+export CURR_JOB_CONTEXT=$1
+
 export REPO_RES="auto_repo"
 export AWS_CREDS_RES="aws_creds"
 export AWS_PEM_RES="aws_pem"
 
-export CURR_JOB_UP=$(echo $CURR_JOB | awk '{print toupper($0)}')
 export PREV_TF_STATEFILE="$JOB_PREVIOUS_STATE/terraform.tfstate"
 
 export REPO_RES_UP=$(echo $REPO_RES | awk '{print toupper($0)}')
@@ -25,9 +24,7 @@ export AWS_PEM_RES_META=$(eval echo "$"$AWS_PEM_RES_UP"_META") #loc of integrati
 test_env_info() {
   echo "Testing all environment variables that are critical"
 
-  echo "########### CURR_JOB: $CURR_JOB"
   echo "########### CURR_JOB_CONTEXT: $CURR_JOB_CONTEXT"
-  echo "########### CURR_JOB_UP: $CURR_JOB_UP"
   echo "########### PREV_TF_STATEFILE: $PREV_TF_STATEFILE"
 
   echo "########### REPO_RES: $REPO_RES"
@@ -72,7 +69,7 @@ get_statefile() {
   if [ -f "$PREV_TF_STATEFILE" ]; then
     echo "Statefile exists, copying"
     echo "-----------------------------------"
-    cp -vr $PREV_TF_STATEFILE "$REPO_RES_STATE/$CURR_JOB_CONTEXT"
+    cp -vr $PREV_TF_STATEFILE $REPO_RES_CONTEXT
   else
     echo "No previous statefile exists"
     echo "-----------------------------------"
@@ -99,7 +96,7 @@ destroy_changes() {
 }
 
 apply_changes() {
-  pushd /build/IN/$REPO_RES/gitRepo/awsProdECS
+  pushd $REPO_RES_CONTEXT
 
   echo "Testing SSH"
   echo "-----------------------------------"
