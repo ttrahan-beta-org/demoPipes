@@ -85,37 +85,37 @@ resources:
     seed:
       versionName: "latest"
 
-## Docker Options for packaged WAR
-#  - name: doc_img_opts
-#    type: dockerOptions
-#    version:
-#      memory: 256
-#      cpuShares: 256
-#      portMappings:
-#        - 8080:8080
+# Docker Options for packaged WAR
+  - name: doc_img_opts
+    type: dockerOptions
+    version:
+      memory: 256
+      cpuShares: 256
+      portMappings:
+        - 8080:8080
 
-## Reference to ECS Test Cluster
-#  - name: env-test-aws
-#    type: cluster
-#    integration: avi-ecs
-#    pointer:
-#      sourceName : "test-aws"
-#      region: "us-east-1"
-#
-## Reference to ECS PROD Cluster
-#  - name: env-prod-aws
-#    type: cluster
-#    integration: avi-ecs
-#    pointer:
-#      sourceName : "prod-aws"
-#      region: "us-east-1"
-#
-## Number of packaged WARs to deploy to Prod
-#  - name: doc-p-scaler
-#    type: replicas
-#    version:
-#      count: 2
-#
+# Reference to ECS Test Cluster
+  - name: env_test_aws
+    type: cluster
+    integration: avi-ecs
+    pointer:
+      sourceName : "test-aws"
+      region: "us-east-1"
+
+# Reference to ECS PROD Cluster
+  - name: env_prod_aws
+    type: cluster
+    integration: avi-ecs
+    pointer:
+      sourceName : "prod-aws"
+      region: "us-east-1"
+
+# Number of packaged WARs to deploy to Prod
+  - name: doc_p_scaler
+    type: replicas
+    version:
+      count: 2
+
 ############################## WAR SIT RESOURCES #########################
 ## REPO of SIT code
 #  - name: sit-repo
