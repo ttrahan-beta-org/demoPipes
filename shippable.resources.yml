@@ -1,14 +1,14 @@
 resources:
 ###################### NATIVE WAR CI/CD RESOURCES #########################
-## JFROG WAR reference
-#  - name: demo_war
-#    type: file
-#    integration: avinci-jf
-#    pointer:
-#      sourceName: builds/HelloWorld.war
-#    seed:
-#      versionName: initial
-#
+# JFROG WAR reference
+  - name: demo_war
+    type: file
+    integration: demo-jf
+    pointer:
+      sourceName: builds/HelloWorld.war
+    seed:
+      versionName: initial
+
 ## VM Cluster
 #  - name: demo_war_test_cls
 #    type: cluster
