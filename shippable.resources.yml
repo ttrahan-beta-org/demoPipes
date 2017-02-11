@@ -10,19 +10,19 @@ resources:
       versionName: "latest"
 
 # VM Cluster
-  - name: demo-war-test-cls
+  - name: demo_war_test_cls
     type: cluster
     integration: demo-test-cls
 
 # Parameters to Run WAR
-  - name: demo-war-params
+  - name: demo_war_params
     type: params
     version:
       params:
         ENVIRONMENT: "FOO"
 
 # JFROG WAR reference
-  - name: demo-war
+  - name: demo_war
     type: file
     integration: avinci-jf
     pointer:
