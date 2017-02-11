@@ -89,7 +89,7 @@ create_pemfile() {
 }
 
 destroy_changes() {
-  pushd $$REPO_RES_CONTEXT
+  pushd $REPO_RES_CONTEXT
   echo "-----------------------------------"
 
   echo "Destroy changes"
