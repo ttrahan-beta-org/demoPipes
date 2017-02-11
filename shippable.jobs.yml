@@ -1,155 +1,155 @@
 jobs:
-########################## NATIVE WAR CI/CD JOBS #########################
-## manifest that defines the Native WAR service definition
-#  - name: demo_war_manifest
-#    type: manifest
-#    steps:
-#      - IN: demo_war
-#      - IN: demo_war_params
-#
-## deploy job that deploys native war to cluster of VMs
-#  - name: demo_war_test_deploy
-#    type: deploy
-#    steps:
-#      - IN: demo_war_manifest
-#        force: true
-#      - IN: demo_war_test_cls
-#      - TASK:
-#        - script: sudo rm -rf /opt/tomcat/webapps/HelloWorld.war
-#        - script: sudo cp /tmp/shippable/demo_war_manifest/demo-war/HelloWorld.war /opt/tomcat/webapps/HelloWorld.war
-#
-########################### INFRA AUTOMATION JOBS #########################
-## job to create AWS AMI used to deploy VMs
-#  - name: build_ami
-#    type: runSh
-#    steps:
-#      - IN: aws_creds
-#      - IN: auto_repo
-#        switch: off
-#      - IN: bldami_params
-#      - TASK:
-#        - script: sudo apt-get install -y jq
-#        - script: IN/auto_repo/gitRepo/awsBuildAMI/basePack.sh bldami_params
-#    on_success:
-#      - script: echo "SUCCESS"
-#    on_failure:
-#      - script: cat /build/IN/auto_repo/gitRepo/awsBuildAMI/output.txt
-#
-## job to setup AWS IAM roles, profiles etc.
-#  - name: aws_infra_setup
-#    type: runSh
-#    steps:
-#      - IN: aws_pem
-#      - IN: aws_creds
-#      - IN: auto_repo
-#        switch: off
-#      - IN: build_ami
-#      - TASK:
-#        - script: sudo apt-get install -y jq
-#        - script: IN/auto_repo/gitRepo/provisionAWS.sh awsSetupIAM
-#    on_success:
-#      - script: echo "SUCCESS"
-#    on_failure:
-#      - script: echo "FAILURE"
-#    always:
-#      - script: /build/IN/auto_repo/gitRepo/archiveProvisionState.sh awsSetupIAM
-#
-## job to provision TEST VMs and ECS cluster
-#  - name: test_infra_prov
-#    type: runSh
-#    steps:
-#      - IN: aws_pem
-#      - IN: aws_creds
-#      - IN: auto_repo
-#        switch: off
-#      - IN: aws_infra_setup
-#      - TASK:
-#        - script: sudo apt-get install -y jq
-#        - script: IN/auto_repo/gitRepo/provisionAWS.sh awsTestECS
-#    on_success:
-#      - script: echo "SUCCESS"
-#    on_failure:
-#      - script: echo "FAILURE"
-#    always:
-#      - script: /build/IN/auto_repo/gitRepo/archiveProvisionState.sh awsTestECS
-#
-## job to provision PROD VMs and ECS cluster
-#  - name: prod_infra_prov
-#    type: runSh
-#    steps:
-#      - IN: aws_pem
-#      - IN: aws_creds
-#      - IN: auto_repo
-#        switch: off
-#      - IN: aws_infra_setup
-#      - IN: build_ami
-#        switch: off
-#      - TASK:
-#        - script: sudo apt-get install -y jq
-#        - script: IN/auto_repo/gitRepo/provisionAWS.sh awsProdECS
-#    on_success:
-#      - script: echo "SUCCESS"
-#    on_failure:
-#      - script: echo "FAILURE"
-#    always:
-#      - script: /build/IN/auto_repo/gitRepo/archiveProvisionState.sh awsProdECS
+######################### NATIVE WAR CI/CD JOBS #########################
+# manifest that defines the Native WAR service definition
+  - name: demo_war_manifest
+    type: manifest
+    steps:
+      - IN: demo_war
+      - IN: demo_war_params
 
-####################### DOCKER Based WAR CI/CD JOBS #######################
-## package sample WAR into docker container
-#  - name: build_doc_war
-#    type: runCLI
-#    steps:
-#      - IN: docker_creds
-#      - IN: demo_war
-#      - IN: demo_doc_repo
-#      - TASK:
-#        - script: IN/demo_doc_repo/gitRepo/build.sh
-#      - OUT: demo_doc_img
-#    on_success:
-#      - script: echo "SUCCESS"
-#    on_failure:
-#      - script: echo "FAILED"
-#
-##  manifest that defines the DOCKER WAR service definition
-#  - name: demo_doc_man
-#    type: manifest
-#    steps:
-#      - IN: demo_doc_img
-#      - IN: doc_img_opts
-#
-### deploy job that deploys native war to TEST ECS Cluster
-#  - name: demo_doc_test
-#    type: deploy
-#    steps:
-#      - IN: demo_doc_man
-#      - IN: env_test_aws
-#      - IN: test_infra_prov
-#      - TASK: managed
-#
-## deploy job that deploys native war to PROD ECS Cluster
-#  - name: demo_doc_prod
-#    type: deploy
-#    steps:
-#      - IN: prod_infra_prov
-#        switch: off
-#      - IN: doc_p_scaler
-#      - IN: demo_doc_test
-#        switch: off
-#      - IN: env_prod_aws
-#      - TASK: managed
+# deploy job that deploys native war to cluster of VMs
+  - name: demo_war_test_deploy
+    type: deploy
+    steps:
+      - IN: demo_war_manifest
+        force: true
+      - IN: demo_war_test_cls
+      - TASK:
+        - script: sudo rm -rf /opt/tomcat/webapps/HelloWorld.war
+        - script: sudo cp /tmp/shippable/demo_war_manifest/demo-war/HelloWorld.war /opt/tomcat/webapps/HelloWorld.war
 
-########################## WAR SIT JOBS #########################
-## job to run SIT testing
-#  - name: sit
-#    type: runSh
-#    steps:
-#      - IN: sit_repo
-#      - IN: demo_doc_test
-#      - IN: sit_params
-#      - TASK:
-#        - script: sudo apt-get install -y jq
-#        - script: IN/sit_repo/gitRepo/test.sh sit_params
-#    on_success:
-#      - script: touch /build/state/success.txt
-#    on_failure:
-#      - script: touch /build/state/failure.txt
+########################## INFRA AUTOMATION JOBS #########################
+# job to create AWS AMI used to deploy VMs
+  - name: build_ami
+    type: runSh
+    steps:
+      - IN: aws_creds
+      - IN: auto_repo
+        switch: off
+      - IN: bldami_params
+      - TASK:
+        - script: sudo apt-get install -y jq
+        - script: IN/auto_repo/gitRepo/awsBuildAMI/basePack.sh bldami_params
+    on_success:
+      - script: echo "SUCCESS"
+    on_failure:
+      - script: cat /build/IN/auto_repo/gitRepo/awsBuildAMI/output.txt
+
+# job to setup AWS IAM roles, profiles etc.
+  - name: aws_infra_setup
+    type: runSh
+    steps:
+      - IN: aws_pem
+      - IN: aws_creds
+      - IN: auto_repo
+        switch: off
+      - IN: build_ami
+      - TASK:
+        - script: sudo apt-get install -y jq
+        - script: IN/auto_repo/gitRepo/provisionAWS.sh awsSetupIAM
+    on_success:
+      - script: echo "SUCCESS"
+    on_failure:
+      - script: echo "FAILURE"
+    always:
+      - script: /build/IN/auto_repo/gitRepo/archiveProvisionState.sh awsSetupIAM
+
+# job to provision TEST VMs and ECS cluster
+  - name: test_infra_prov
+    type: runSh
+    steps:
+      - IN: aws_pem
+      - IN: aws_creds
+      - IN: auto_repo
+        switch: off
+      - IN: aws_infra_setup
+      - TASK:
+        - script: sudo apt-get install -y jq
+        - script: IN/auto_repo/gitRepo/provisionAWS.sh awsTestECS
+    on_success:
+      - script: echo "SUCCESS"
+    on_failure:
+      - script: echo "FAILURE"
+    always:
+      - script: /build/IN/auto_repo/gitRepo/archiveProvisionState.sh awsTestECS
+
+# job to provision PROD VMs and ECS cluster
+  - name: prod_infra_prov
+    type: runSh
+    steps:
+      - IN: aws_pem
+      - IN: aws_creds
+      - IN: auto_repo
+        switch: off
+      - IN: aws_infra_setup
+      - IN: build_ami
+        switch: off
+      - TASK:
+        - script: sudo apt-get install -y jq
+        - script: IN/auto_repo/gitRepo/provisionAWS.sh awsProdECS
+    on_success:
+      - script: echo "SUCCESS"
+    on_failure:
+      - script: echo "FAILURE"
+    always:
+      - script: /build/IN/auto_repo/gitRepo/archiveProvisionState.sh awsProdECS
+
+###################### DOCKER Based WAR CI/CD JOBS #######################
+# package sample WAR into docker container
+  - name: build_doc_war
+    type: runCLI
+    steps:
+      - IN: docker_creds
+      - IN: demo_war
+      - IN: demo_doc_repo
+      - TASK:
+        - script: IN/demo_doc_repo/gitRepo/build.sh
+      - OUT: demo_doc_img
+    on_success:
+      - script: echo "SUCCESS"
+    on_failure:
+      - script: echo "FAILED"
+
+#  manifest that defines the DOCKER WAR service definition
+  - name: demo_doc_man
+    type: manifest
+    steps:
+      - IN: demo_doc_img
+      - IN: doc_img_opts
+
+## deploy job that deploys native war to TEST ECS Cluster
+  - name: demo_doc_test
+    type: deploy
+    steps:
+      - IN: demo_doc_man
+      - IN: env_test_aws
+      - IN: test_infra_prov
+      - TASK: managed
+
+# deploy job that deploys native war to PROD ECS Cluster
+  - name: demo_doc_prod
+    type: deploy
+    steps:
+      - IN: prod_infra_prov
+        switch: off
+      - IN: doc_p_scaler
+      - IN: demo_doc_test
+        switch: off
+      - IN: env_prod_aws
+      - TASK: managed
+
+######################### WAR SIT JOBS #########################
+# job to run SIT testing
+  - name: sit
+    type: runSh
+    steps:
+      - IN: sit_repo
+      - IN: demo_doc_test
+      - IN: sit_params
+      - TASK:
+        - script: sudo apt-get install -y jq
+        - script: IN/sit_repo/gitRepo/test.sh sit_params
+    on_success:
+      - script: touch /build/state/success.txt
+    on_failure:
+      - script: touch /build/state/failure.txt
