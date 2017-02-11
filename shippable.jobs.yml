@@ -95,22 +95,22 @@ jobs:
     always:
       - script: /build/IN/auto_repo/gitRepo/archiveProvisionState.sh awsProdECS
 
-####################### DOCKER Based WAR CI/CD JOBS #######################
-## package sample WAR into docker container
-#  - name: build-doc-war
-#    type: runSh
-#    steps:
-#      - IN: docker-creds
-#      - IN: demo-doc-repo
-#      - TASK:
-#        - script: sudo apt-get install -y jq
-#        - script: IN/demo-doc-repo/gitRepo/build.sh
-#      - OUT: demo-doc-img
-#    on_success:
-#      - script: echo "SUCCESS"
-#    on_failure:
-#      - script: echo "FAILED"
-#
+###################### DOCKER Based WAR CI/CD JOBS #######################
+# package sample WAR into docker container
+  - name: build_doc_war
+    type: runSh
+    steps:
+      - IN: docker_creds
+      - IN: demo_doc_repo
+      - TASK:
+        - script: sudo apt-get install -y jq
+        - script: IN/demo_doc_repo/gitRepo/build.sh
+      - OUT: demo_doc_img
+    on_success:
+      - script: echo "SUCCESS"
+    on_failure:
+      - script: echo "FAILED"
+
 ##  manifest that defines the DOCKER WAR service definition
 #  - name: demo-doc-man
 #    type: manifest
