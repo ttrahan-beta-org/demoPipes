@@ -9,6 +9,13 @@ resources:
    seed:
      versionName: master.1/HelloWorld.war
 
+# aws CLI config
+ - name: demo_war_awscli
+   type: cliConfig
+   integration: ttrahan-aws
+   pointer:
+     region: us-east-1
+
 # VM Cluster
  - name: demo_war_test_cls
    type: cluster
