@@ -17,8 +17,8 @@ jobs:
      - IN: demo_war_awscli
      - IN: demo_war_params
      - TASK:
-       - script: echo "Latest build is in :"$S3_BUCKET/$LATEST_BUILD
+       - script: echo "Latest build is in :"$DEMO_WAR_PARAMS_PARAMS_S3_BUCKET/$DEMO_WAR_PARAMS_PARAMS_LATEST_BUILD
        # - script: "aws command to call Opsworks"  
-       - aws s3 cp s3://$S3_BUCKET/$LATEST_BUILD/HelloWorld.war /tmp/shippable/HelloWorld.war
+       - aws s3 cp s3://$DEMO_WAR_PARAMS_PARAMS_S3_BUCKET/$DEMO_WAR_PARAMS_PARAMS_LATEST_BUILD/HelloWorld.war /tmp/shippable/HelloWorld.war
        - script: echo $DEMO_WAR_TEST_CLS_INTEGRATION_PRIVATEKEY > ~/.ssh/ec2-node.pem
        - script: scp -i ~/.ssh/ec2-node.pem /tmp/shippable/HelloWorld.war shippable@ec2-54-204-165-30.compute-1.amazonaws.com:/opt/tomcat/HelloWorld.war -y
