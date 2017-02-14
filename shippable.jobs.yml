@@ -14,7 +14,7 @@ jobs:
      - IN: demo_war_manifest
        force: true
      - IN: demo_war_awscli
-     - IN: demo_war_test_cls
+     # - IN: demo_war_test_cls
      - TASK:
        - script: printenv | grep "DEMOWAR"
        # - script: sudo rm -rf /opt/tomcat/webapps/HelloWorld.war
