@@ -8,15 +8,15 @@ jobs:
      - IN: demo_war_params
 
 # deploy job that deploys native war to cluster of VMs
- # - name: demo_war_test_deploy
- #   type: runCLI
- #   steps:
- #     - IN: demo_war_manifest
- #       force: true
- #     - IN: demo_war_awscli
- #     - IN: demo_war_test_cls
- #     - TASK:
- #       - script: printenv | grep "DEMOWAR"
+ - name: demo_war_test_deploy
+   type: runCLI
+   steps:
+     - IN: demo_war_manifest
+       force: true
+     - IN: demo_war_awscli
+     - IN: demo_war_test_cls
+     - TASK:
+       - script: printenv | grep "DEMOWAR"
        # - script: sudo rm -rf /opt/tomcat/webapps/HelloWorld.war
        # - script: sudo cp /tmp/shippable/demo_war_manifest/demo_war/HelloWorld.war /opt/tomcat/webapps/HelloWorld.war
 
