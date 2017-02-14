@@ -18,4 +18,5 @@ jobs:
      - IN: demo_war_params
      - TASK:
        - script: echo "Latest build is in :"$S3_BUCKET/$LATEST_BUILD
-       - script: "aws command to call Opsworks"  
+       # - script: "aws command to call Opsworks"  
+       - script: ls ~/.ssh
