@@ -27,6 +27,6 @@ resources:
    version:
      params:
        ENVIRONMENT: "TEST"
-       S3_BUCKET: "shipdemo-java-s3-ec2/builds"
+       S3BUCKET: "shipdemo-java-s3-ec2/builds"
        LATEST_BUILD: "master.1"
 
