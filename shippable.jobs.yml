@@ -1,18 +1,18 @@
 jobs:
 ######################### NATIVE WAR CI/CD JOBS #########################
-# manifest that defines the Native WAR service definition
- - name: demo_war_manifest
-   type: manifest
-   steps:
-     - IN: demo_war_s3
-     - IN: demo_war_params
+# # manifest that defines the Native WAR service definition
+#  - name: demo_war_manifest
+#    type: manifest
+#    steps:
+#      - IN: demo_war_s3
+#      - IN: demo_war_params
 
 # deploy job that deploys native war to cluster of VMs
  - name: demo_war_test_deploy
    type: runCLI
    steps:
-     - IN: demo_war_manifest
-       force: true
+     # - IN: demo_war_manifest
+     #   force: true
      - IN: demo_war_awscli
      # - IN: demo_war_test_cls
      - IN: demo_war_params
