@@ -16,10 +16,10 @@ resources:
    pointer:
      region: us-east-1
 
-# # VM Cluster
-#  - name: demo_war_test_cls
-#    type: cluster
-#    integration: "demo-vm-cluster"
+# VM Cluster
+ - name: demo_war_test_cls
+   type: cluster
+   integration: "demo-vm-cluster"
 
 # Parameters to Run WAR
  - name: demo_war_params
