@@ -17,6 +17,7 @@ jobs:
      - IN: demo_war_awscli
      - IN: demo_war_params
      - TASK:
+       - script: printenv | grep "DEMO_WAR_PARAMS"
        - script: echo "Latest build is in :"$DEMO_WAR_PARAMS_PARAMS_S3_BUCKET/$DEMO_WAR_PARAMS_PARAMS_LATEST_BUILD
        # - script: "aws command to call Opsworks"  
        - aws s3 cp s3://$DEMO_WAR_PARAMS_PARAMS_S3_BUCKET/$DEMO_WAR_PARAMS_PARAMS_LATEST_BUILD/HelloWorld.war /tmp/shippable/HelloWorld.war
