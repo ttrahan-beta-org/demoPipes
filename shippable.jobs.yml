@@ -21,9 +21,10 @@ jobs:
      - TASK:
        - script: printenv | grep "DEMO_WAR_TEST"
        - script: ls -al $DEMO_WAR_TEST_CLS_PATH
-       - script: echo $DEMO_WAR_TEST_CLS_INTEGRATION_PRIVATEKEY
        - script: echo "Latest build is in - "$DEMO_WAR_S3_SOURCENAME/$DEMO_WAR_S3_VERSIONNAME
        # - script: "aws command to call Opsworks"  
        - aws s3 cp s3://$DEMO_WAR_S3_SOURCENAME/$DEMO_WAR_S3_VERSIONNAME /tmp/shippable/HelloWorld.war
        - script: echo $DEMO_WAR_TEST_CLS_INTEGRATION_PRIVATEKEY > ~/.ssh/ec2-node && sudo chmod 600 ~/.ssh/ec2-node
+       - script: ls -al ~/.ssh/
+       - script: cat ~/.ssh/ec2-node
        - script: scp -i ~/.ssh/ec2-node /tmp/shippable/HelloWorld.war shippable@ec2-54-204-165-30.compute-1.amazonaws.com@ec2-54-204-165-30.compute-1.amazonaws.com:/opt/tomcat/HelloWorld.war
