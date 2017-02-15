@@ -5,7 +5,7 @@ resources:
    type: file
    integration: "ttrahan-aws"
    pointer:
-     sourceName: "builds/"
+     sourceName: "shipdemo-java-s3-ec2/builds/"
    seed:
      versionName: master.1/HelloWorld.war
 
@@ -27,6 +27,11 @@ resources:
    version:
      params:
        ENVIRONMENT: "TEST"
+
+# Params for deployment
+ - name: demo_war_params_build
+   type: params
+   version:
+     params:
        S3BUCKET: "shipdemo-java-s3-ec2/builds"
        LATEST_BUILD: "master.1"
-
